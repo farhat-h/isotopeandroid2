@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="18dp"
+    android:height="18dp"
+    android:viewportWidth="18"
+    android:viewportHeight="18">
+    <path
+        android:fillColor="?attr/session_c_chipText"
+        android:pathData="M4.5,0.75V2.25H3.75C2.9238,2.25 2.25,2.9238 2.25,3.75V14.25C2.25,15.0762 2.9238,15.75 3.75,15.75H14.25C15.0762,15.75 15.75,15.0762 15.75,14.25V3.75C15.75,2.9238 15.0762,2.25 14.25,2.25H13.5V0.75H12V2.25H6V0.75H4.5ZM3.75,3.75H14.25V5.25H3.75V3.75ZM3.75,6.75H14.25V14.25H3.75V6.75Z" />
+</vector>

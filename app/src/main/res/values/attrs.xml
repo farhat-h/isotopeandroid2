@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="theme">
+        <attr name="BackgroundColor" format="color" />
+        <attr name="containerColor" format="color" />
+        <attr name="primaryTextColor" format="color" />
+        <attr name="secondaryTextColor" format="color" />
+
+        <attr name="session_tp_background" format="color" />
+        <attr name="session_tp_subject" format="color" />
+        <attr name="session_tp_chipBackground" format="color" />
+        <attr name="session_tp_chipText" format="color" />
+        <attr name="session_tp_professorText" format="color" />
+
+        <attr name="session_td_background" format="color" />
+        <attr name="session_td_subject" format="color" />
+        <attr name="session_td_chipBackground" format="color" />
+        <attr name="session_td_chipText" format="color" />
+        <attr name="session_td_professorText" format="color" />
+
+        <attr name="session_c_background" format="color" />
+        <attr name="session_c_subject" format="color" />
+        <attr name="session_c_chipBackground" format="color" />
+        <attr name="session_c_chipText" format="color" />
+        <attr name="session_c_professorText" format="color" />
+        <attr name="DividerColor" format="color" />
+
+
+    </declare-styleable>
+</resources>

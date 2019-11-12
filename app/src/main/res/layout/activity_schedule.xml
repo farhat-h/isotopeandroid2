@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="?attr/BackgroundColor">
+
+        <androidx.constraintlayout.motion.widget.MotionLayout
+            android:id="@+id/motion_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:minHeight="80dp"
+            app:layoutDescription="@xml/header_animation"
+            app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
+
+            <TextView
+                android:id="@+id/week_reference"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="This is an awefull hot coffee pot"
+                android:textAppearance="@style/font_subtitle"
+                android:textColor="?attr/primaryTextColor" />
+
+            <TextView
+                android:id="@+id/major_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/major_pick_hint"
+                android:textAppearance="@style/font_major_name"
+                android:textColorHint="?attr/primaryTextColor" />
+
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@drawable/background_container"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tabIndicatorColor="?colorPrimary"
+                app:tabIndicatorFullWidth="false"
+                app:tabIndicatorHeight="6dp"
+                app:tabMode="scrollable"
+                app:tabTextAppearance="@style/font_tab" />
+        </androidx.constraintlayout.motion.widget.MotionLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/viewPager"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/containerColor" />
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

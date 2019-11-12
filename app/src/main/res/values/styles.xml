@@ -1,0 +1,118 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#FF1887</item>
+        <item name="colorPrimaryDark">#FFBEE2</item>
+        <item name="colorAccent">#18FFC8</item>
+        <item name="containerColor">#FFF</item>
+        <item name="BackgroundColor">#EEEEEE</item>
+        <item name="primaryTextColor">#121726</item>
+        <item name="secondaryTextColor">#C7C7C7</item>
+
+        <item name="session_tp_background">#FFBEE2</item>
+        <item name="session_tp_subject">#C46B9C</item>
+        <item name="session_tp_chipBackground">#ECA7CC</item>
+        <item name="session_tp_chipText">#C46B9C</item>
+        <item name="session_tp_professorText">#C46B9C</item>
+
+        <item name="session_td_background">#C7F0B8</item>
+        <item name="session_td_subject">#62A859</item>
+        <item name="session_td_chipBackground">#B4E1A8</item>
+        <item name="session_td_chipText">#62A859</item>
+        <item name="session_td_professorText">#62A859</item>
+
+        <item name="session_c_background">#FFDCBE</item>
+        <item name="session_c_subject">#E28940</item>
+        <item name="session_c_chipBackground">#F2C79F</item>
+        <item name="session_c_chipText">#E28940</item>
+        <item name="session_c_professorText">#E28940</item>
+
+        <item name="DividerColor">#E5E5E5</item>
+    </style>
+
+    <style name="AppThemeDark" parent="Theme.AppCompat.DayNight.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#12B88D</item>
+        <item name="colorPrimaryDark">#FF0A8363</item>
+        <item name="colorAccent">#FF1887</item>
+        <item name="BackgroundColor">#263238</item>
+        <item name="containerColor">#172126</item>
+        <item name="primaryTextColor">#FFFFFF</item>
+        <item name="secondaryTextColor">#C9C9C9</item>
+
+        <item name="session_tp_background">#FF5A92</item>
+        <item name="session_tp_subject">#172126</item>
+        <item name="session_tp_chipBackground">#EC2A6C</item>
+        <item name="session_tp_chipText">#172126</item>
+        <item name="session_tp_professorText">#FFF</item>
+
+        <item name="session_td_background">#4FE099</item>
+        <item name="session_td_subject">#172126</item>
+        <item name="session_td_chipBackground">#25C376</item>
+        <item name="session_td_chipText">#172126</item>
+        <item name="session_td_professorText">#FFF</item>
+
+        <item name="session_c_background">#FFD740</item>
+        <item name="session_c_subject">#172126</item>
+        <item name="session_c_chipBackground">#EBC431</item>
+        <item name="session_c_chipText">#172126</item>
+        <item name="session_c_professorText">#FFF</item>
+
+        <item name="DividerColor">#000</item>
+    </style>
+
+    <style name="font_title">
+        <item name="android:textSize">48sp</item>
+        <item name="android:fontFamily">@font/cera_pro_black</item>
+        <item name="android:textColor">?attr/primaryTextColor</item>
+    </style>
+
+    <style name="font_input">
+        <item name="android:fontFamily">@font/cera_pro_medium</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="font_major_name">
+        <item name="android:fontFamily">@font/cera_pro_black</item>
+        <item name="android:textSize">32sp</item>
+    </style>
+
+    <style name="font_subtitle">
+        <item name="android:fontFamily">@font/cera_pro_regular</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
+    <style name="font_time_numbers">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/cera_pro_regular</item>
+    </style>
+
+    <style name="font_time_letters">
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/cera_pro_regular</item>
+    </style>
+
+    <style name="font_session_subject">
+        <item name="android:textSize">21sp</item>
+        <item name="android:fontFamily">@font/cera_pro_bold</item>
+    </style>
+
+    <style name="font_session_type">
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/cera_pro_black</item>
+    </style>
+
+    <style name="font_session_chip">
+        <item name="android:textSize">12sp</item>
+        <item name="android:fontFamily">@font/cera_pro_medium</item>
+    </style>
+
+    <style name="font_tab">
+        <item name="android:fontFamily">@font/cera_pro_bold</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:textColor">?attr/primaryTextColor</item>
+        <item name="android:capitalize">none</item>
+    </style>
+</resources>

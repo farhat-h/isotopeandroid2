@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">IsotopeAndroid</string>
+    <string name="pick_your_major">Pick your major</string>
+    <string name="major_pick_hint">ex: FIA1-04</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
