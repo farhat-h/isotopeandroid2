@@ -77,6 +77,7 @@ public class Helper {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION // hide nav bar
                         | View.SYSTEM_UI_FLAG_FULLSCREEN // hide status bar
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
+        w.setStatusBarColor(R.attr.BackgroundColor);
     }
 
     // This snippet shows the system bars. It does this by removing all the flags

@@ -17,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.alttab.isotopeandroid.Adapters.SessionRecyclerViewAdapter;
+import com.alttab.isotopeandroid.Constants;
 import com.alttab.isotopeandroid.Helper;
 import com.alttab.isotopeandroid.R;
 import com.alttab.isotopeandroid.ScheduleActivity;
@@ -25,6 +26,9 @@ import com.alttab.isotopeandroid.Tasks.SessionLoaderCallbacks;
 import com.alttab.isotopeandroid.ViewHolders.SessionViewHolder;
 import com.alttab.isotopeandroid.database.Session;
 
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
 import java.util.List;
 
 import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
@@ -40,6 +44,12 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
     private SessionRecyclerViewAdapter adapter;
     private RecyclerView.RecycledViewPool pool;
 
+    public static Comparator<Session> sessionComparator = new Comparator<Session>() {
+        @Override
+        public int compare(Session o1, Session o2) {
+            return o1.time.compareTo(o2.time);
+        }
+    };
 
     public DayFragment() {
         // Required empty public constructor
@@ -78,8 +88,20 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
     }
 
     @Override
-    public void onTaskDone(List<Session> objects) {
-        adapter = new SessionRecyclerViewAdapter(getContext(), objects);
+    public void onTaskDone(List<Session> sessions) {
+
+        HashMap<String, Boolean> existingSessions = new HashMap<>();
+        for (Session s : sessions) {
+            existingSessions.put(s.time, true);
+        }
+
+        for (String time : Constants.TIMES) {
+            if (!existingSessions.containsKey(time)) {
+                sessions.add(Session.createEmptySession(time));
+            }
+        }
+        Collections.sort(sessions, sessionComparator);
+        adapter = new SessionRecyclerViewAdapter(getContext(), sessions);
         recyclerView.setAdapter(adapter);
     }
 }

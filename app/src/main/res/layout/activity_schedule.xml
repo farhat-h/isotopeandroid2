@@ -45,18 +45,18 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginRight="24dp"
-                    android:text="version"
+                    android:layout_marginRight="12dp"
+                    android:text="update"
                     android:textAppearance="@style/font_display"
-                    android:textColor="?attr/primaryTextColor"
+                    android:textColor="?attr/secondaryTextColor"
                     android:textColorHint="?attr/primaryTextColor" />
 
                 <TextView
                     android:id="@+id/schedule_version"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="11-11"
-                    android:textAppearance="@style/font_major_name"
+                    android:text="11-11-2019"
+                    android:textAppearance="@style/font_display2"
                     android:textColor="?attr/primaryTextColor" />
             </LinearLayout>
 

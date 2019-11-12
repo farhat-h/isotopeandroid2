@@ -17,6 +17,12 @@ import androidx.room.PrimaryKey;
                         childColumns = "majorId")}
 )
 public class Session {
+
+    public static Session createEmptySession(String time) {
+        Session s = new Session(EMPTY_ID, 0, time, null, null, null, null, null, 0, null);
+        return s;
+    }
+
     public static final String EMPTY_ID = "EMPTY_ID";
     @NonNull
     @PrimaryKey
@@ -39,16 +45,5 @@ public class Session {
         this.regime = regime;
         this.subGroup = subGroup;
         this.majorId = majorId;
-    }
-
-    public static Session createEmptySession(String time) {
-        Session s = new Session(EMPTY_ID, 0, time, null, null, null, null, null, 0, null);
-
-        return s;
-    }
-
-    public static Session createEmpty(String time) {
-        Session s = new Session("KEKW", -1, time, null, null, null, null, null, -1, null);
-        return s;
     }
 }

@@ -2,6 +2,7 @@ package com.alttab.isotopeandroid.ViewHolders;
 
 import android.content.Context;
 import android.content.res.TypedArray;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,11 +16,21 @@ import com.alttab.isotopeandroid.database.Session;
 
 import java.util.HashMap;
 
+import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
+
 public class SessionViewHolder extends RecyclerView.ViewHolder {
 
     private static HashMap<String, String> timeEnds;
     private static HashMap<String, String> timeStarts;
 
+    private TextView subject;
+    private TextView type;
+    private TextView room;
+    private TextView regime;
+    private TextView professor;
+    private TextView time;
+    private TextView timeStart;
+    private TextView timeEnd;
 
     public static HashMap<String, String> getTimeEnds() {
         if (timeEnds == null) {
@@ -44,34 +55,40 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
 
     public SessionViewHolder(@NonNull View itemView) {
         super(itemView);
+
+
+        subject = itemView.findViewById(R.id.Subject);
+
+        type = itemView.findViewById(R.id.SessionType);
+
+        room = itemView.findViewById(R.id.SessionRoom);
+
+        regime = itemView.findViewById(R.id.SessionRegime);
+
+        professor = itemView.findViewById(R.id.SessionProfessor);
+
+        time = itemView.findViewById(R.id.SessionTimeNumber);
+
+        timeStart = itemView.findViewById(R.id.SessionTimeStart);
+
+        timeEnd = itemView.findViewById(R.id.SessionTimeEnd);
+
     }
 
     public void setmSession(Session mSession) {
-        setupSession(this.itemView, mSession);
-    }
 
-    private void setupSession(View view, Session session) {
+        time.setText(mSession.time);
+        timeStart.setText(getTimeStarts().get(mSession.time));
+        timeEnd.setText(getTimeEnds().get(mSession.time));
+        if (!mSession.sessionId.equals(Session.EMPTY_ID)) {
 
-        TextView subject = view.findViewById(R.id.Subject);
-        TextView type = view.findViewById(R.id.SessionType);
-        TextView room = view.findViewById(R.id.SessionRoom);
-        TextView regime = view.findViewById(R.id.SessionRegime);
-        TextView professor = view.findViewById(R.id.SessionProfessor);
+            subject.setText(extractSubjectName(mSession.subject));
+            type.setText(mSession.type);
+            room.setText(mSession.room);
+            regime.setText(mSession.regime);
+            professor.setText(mSession.professor);
 
-        TextView time = view.findViewById(R.id.SessionTimeNumber);
-        TextView timeStart = view.findViewById(R.id.SessionTimeStart);
-        TextView timeEnd = view.findViewById(R.id.SessionTimeEnd);
-
-        time.setText(session.time);
-        timeStart.setText(getTimeStarts().get(session.time));
-        timeEnd.setText(getTimeEnds().get(session.time));
-        subject.setText(extractSubjectName(session.subject));
-        type.setText(session.type);
-        room.setText(session.room);
-        regime.setText(session.regime);
-        professor.setText(session.professor);
-
-
+        }
     }
 
     private String extractSubjectName(String subject) {
@@ -84,6 +101,7 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
 
         return subject;
     }
+
     private static String getTimeBound(String time, String bound) {
         String start = "", end = "";
         switch (time) {

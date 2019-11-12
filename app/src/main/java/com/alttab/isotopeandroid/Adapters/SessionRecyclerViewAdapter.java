@@ -20,6 +20,7 @@ public class SessionRecyclerViewAdapter extends RecyclerView.Adapter<SessionView
     public static final int ITEM_TP = 1;
     public static final int ITEM_TD = 2;
     public static final int ITEM_C = 3;
+    public static final int ITEM_EMPTY = 4;
 
     private Context mContext;
     private List<Session> sessionList;
@@ -31,21 +32,19 @@ public class SessionRecyclerViewAdapter extends RecyclerView.Adapter<SessionView
 
     @Override
     public int getItemViewType(int position) {
-        String type = "UNDEFINED_TYPE";
-        if (sessionList != null)
-            type = sessionList.get(position).type;
+        Session session = sessionList.get(position);
+        if (session.sessionId.equals(Session.EMPTY_ID))
+            return ITEM_EMPTY;
 
-        switch (type) {
-            case "TP":
-                return ITEM_TP;
-            case "TD":
-                return ITEM_TD;
-            case "C":
-                return ITEM_C;
-            default:
-                return ITEM_TP;
-        }
+        else if (session.type.equals("TP"))
+            return ITEM_TP;
 
+        else if (session.type.equals("TD"))
+            return ITEM_TD;
+
+        else if (session.type.equals("C"))
+            return ITEM_C;
+        else return ITEM_EMPTY;
     }
 
     @NonNull
@@ -62,12 +61,11 @@ public class SessionRecyclerViewAdapter extends RecyclerView.Adapter<SessionView
             case ITEM_C:
                 resource = R.layout.session_c_layout;
                 break;
-
             default:
-                resource = R.layout.session_td_layout;
+                resource = R.layout.empty_session_layout;
                 break;
-
         }
+
         View itemView = LayoutInflater.from(mContext).inflate(resource, parent, false);
         return new SessionViewHolder(itemView);
     }

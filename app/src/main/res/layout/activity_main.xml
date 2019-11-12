@@ -44,6 +44,7 @@
         android:textAppearance="@style/font_input"
         android:textColor="?attr/primaryTextColor"
         android:textColorHint="?attr/secondaryTextColor"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pick_major_title" />

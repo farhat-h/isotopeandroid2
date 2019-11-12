@@ -20,6 +20,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.lang.ref.WeakReference;
+import java.util.Calendar;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -81,6 +82,14 @@ public class ScheduleActivity extends AppCompatActivity {
                 tab.setText(Constants.DAYS[position]);
             }
         }).attach();
+
+        tabLayout.getTabAt(getDayNumber() - 1).select();
+
+    }
+
+    private int getDayNumber() {
+        Calendar calendar = Calendar.getInstance();
+        return calendar.get(Calendar.DAY_OF_WEEK);
     }
 
 }

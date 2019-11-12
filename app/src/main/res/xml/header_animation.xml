@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginTop="80dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,11 +53,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="?attr/actionBarSize"
+            android:layout_marginTop="80dp"
             android:alpha="0"
             android:translationX="200dp"
-            app:layout_constraintBottom_toTopOf="@+id/tabLayout"
-            app:layout_constraintLeft_toLeftOf="parent" />
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
         <!-- WEEK DAY FRAME_2  -->
         <Constraint
             android:id="@id/week_reference"

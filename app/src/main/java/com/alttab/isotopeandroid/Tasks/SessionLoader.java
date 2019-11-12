@@ -24,12 +24,7 @@ public class SessionLoader extends AsyncTaskLoader<List<Session>> {
     private WeakReference<Repository> wrRepo;
     private String majorId;
     private int day;
-    public static Comparator<Session> sessionComparator = new Comparator<Session>() {
-        @Override
-        public int compare(Session o1, Session o2) {
-            return o1.time.compareTo(o2.time);
-        }
-    };
+
 
     public SessionLoader(@NonNull Context context, Repository repository, String majorId, int day) {
         super(context);
@@ -43,17 +38,6 @@ public class SessionLoader extends AsyncTaskLoader<List<Session>> {
     public List<Session> loadInBackground() {
         List<Session> sessions = wrRepo.get().getSessionsForDay(majorId, day);
 
-        HashMap<String, Boolean> existingSessions = new HashMap<>();
-        for (Session s : sessions) {
-            existingSessions.put(s.time, true);
-        }
-
-        for (String time : Constants.TIMES) {
-            if (!existingSessions.containsKey(time)) {
-                sessions.add(Session.createEmpty(time));
-            }
-        }
-        Collections.sort(sessions, sessionComparator);
         return sessions;
     }
 
