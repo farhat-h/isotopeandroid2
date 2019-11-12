@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:minHeight="220dp"
+    android:orientation="horizontal"
+    android:paddingLeft="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginRight="24dp">
+
+        <TextView
+            android:id="@+id/SessionTimeStart"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="08:30"
+            android:textAppearance="@style/font_time_numbers"
+            android:textColor="?attr/secondaryTextColor"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/SessionTimeLine"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="#EEE"
+            app:layout_constraintBottom_toTopOf="@id/SessionTimeEnd"
+            app:layout_constraintHeight_percent="0.6"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SessionTimeStart" />
+
+        <TextView
+            android:id="@+id/SessionTimeNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="S1"
+            android:textAppearance="@style/font_time_letters"
+            android:textColor="?attr/primaryTextColor"
+            app:layout_constraintBottom_toTopOf="@id/SessionTimeEnd"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/SessionTimeStart" />
+
+        <TextView
+            android:id="@+id/SessionTimeEnd"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="10:00"
+            android:textAppearance="@style/font_time_numbers"
+            android:textColor="?attr/secondaryTextColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/SessionContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/tp_session_background"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/Subject"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="%SUBJECT NAME%"
+            android:textAppearance="@style/font_session_subject"
+            android:textColor="?attr/session_tp_subject"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_percent=".8" />
+
+        <TextView
+            android:id="@+id/SessionType"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="%TP%"
+            android:textAppearance="@style/font_session_type"
+            android:textColor="?attr/session_tp_chipBackground"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+
+            android:id="@+id/SessionRoom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/tp_chip_background"
+            android:drawableLeft="@drawable/ic_room_tp"
+            android:drawablePadding="8dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="8dp"
+            android:text="%ROOM%"
+            android:textAppearance="@style/font_session_chip"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Subject" />
+
+        <TextView
+            android:id="@+id/SessionRegime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:background="@drawable/tp_chip_background"
+            android:drawableLeft="@drawable/ic_regime_tp"
+            android:drawablePadding="8dp"
+            android:paddingLeft="12dp"
+            android:paddingTop="8dp"
+            android:paddingRight="12dp"
+            android:paddingBottom="8dp"
+            android:text="%REGIME%"
+            android:textAppearance="@style/font_session_chip"
+            app:layout_constraintLeft_toRightOf="@id/SessionRoom"
+            app:layout_constraintTop_toTopOf="@id/SessionRoom" />
+
+        <TextView
+            android:id="@+id/SessionProfessor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/session_chip_background"
+            android:padding="8dp"
+            android:text="%PROFESSOR NAME%"
+            android:textAppearance="@style/font_session_chip"
+            android:textColor="?attr/session_tp_professorText"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/SessionRoom"
+            app:layout_constraintVertical_bias="1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

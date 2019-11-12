@@ -41,11 +41,9 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
         return timeStarts;
     }
 
-    private Context context;
 
-    public SessionViewHolder(@NonNull View itemView, Context context) {
+    public SessionViewHolder(@NonNull View itemView) {
         super(itemView);
-        this.context = context;
     }
 
     public void setmSession(Session mSession) {
@@ -73,8 +71,6 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
         regime.setText(session.regime);
         professor.setText(session.professor);
 
-        ConstraintLayout container = view.findViewById(R.id.SessionContainer);
-        setupColors(session.type, subject, type, room, regime, professor, container);
 
     }
 
@@ -88,72 +84,6 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
 
         return subject;
     }
-
-    private void setupColors(String type, TextView subjectText, TextView typeView, TextView room, TextView regime, TextView professor, ConstraintLayout container) {
-
-        TypedArray themeData = context.getTheme().obtainStyledAttributes(R.styleable.theme);
-
-        switch (type) {
-            case "TP":
-                container.setBackgroundResource(R.drawable.tp_session_background);
-                subjectText.setTextColor(themeData.getColorStateList(R.styleable.theme_session_tp_subject));
-                typeView.setTextColor(themeData.getColorStateList(R.styleable.theme_session_tp_chipBackground));
-
-                room.setTextColor(themeData.getColorStateList(R.styleable.theme_session_tp_chipText));
-                room.setBackgroundResource(R.drawable.tp_chip_background);
-                room.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_room_tp, 0, 0, 0);
-
-                regime.setTextColor(themeData.getColorStateList(R.styleable.theme_session_tp_chipText));
-                regime.setBackgroundResource(R.drawable.tp_chip_background);
-                regime.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_regime_tp, 0, 0, 0);
-
-                professor.setTextColor(themeData.getColorStateList(R.styleable.theme_session_tp_professorText));
-                professor.setBackgroundResource(R.drawable.session_chip_background);
-
-                break;
-
-            case "TD":
-                container.setBackgroundResource(R.drawable.td_session_background);
-
-                subjectText.setTextColor(themeData.getColorStateList(R.styleable.theme_session_td_subject));
-                typeView.setTextColor(themeData.getColorStateList(R.styleable.theme_session_td_chipBackground));
-
-                room.setTextColor(themeData.getColorStateList(R.styleable.theme_session_td_chipText));
-                room.setBackgroundResource(R.drawable.td_chip_background);
-                room.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_room_td, 0, 0, 0);
-
-                regime.setTextColor(themeData.getColorStateList(R.styleable.theme_session_td_chipText));
-                regime.setBackgroundResource(R.drawable.td_chip_background);
-                regime.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_regime_td, 0, 0, 0);
-
-                professor.setTextColor(themeData.getColorStateList(R.styleable.theme_session_td_professorText));
-                professor.setBackgroundResource(R.drawable.session_chip_background);
-
-                break;
-
-            case "C":
-                container.setBackgroundResource(R.drawable.c_session_background);
-
-                subjectText.setTextColor(themeData.getColorStateList(R.styleable.theme_session_c_subject));
-                typeView.setTextColor(themeData.getColorStateList(R.styleable.theme_session_c_chipBackground));
-
-                room.setTextColor(themeData.getColorStateList(R.styleable.theme_session_c_chipText));
-                room.setBackgroundResource(R.drawable.c_chip_background);
-                room.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_room_c, 0, 0, 0);
-
-
-                regime.setTextColor(themeData.getColorStateList(R.styleable.theme_session_c_chipText));
-                regime.setBackgroundResource(R.drawable.c_chip_background);
-                regime.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_regime_c, 0, 0, 0);
-
-
-                professor.setTextColor(themeData.getColorStateList(R.styleable.theme_session_c_professorText));
-                professor.setBackgroundResource(R.drawable.session_chip_background);
-
-                break;
-        }
-    }
-
     private static String getTimeBound(String time, String bound) {
         String start = "", end = "";
         switch (time) {
