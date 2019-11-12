@@ -28,5 +28,9 @@ public class Repository {
         return sessions.getAlternativeSessions(day, time, majorId);
     }
 
+    public Major getMajorById(String majorId) {
+        return majors.getMajorById(majorId);
+    }
+
 }
 

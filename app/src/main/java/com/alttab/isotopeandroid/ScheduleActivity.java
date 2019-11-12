@@ -7,13 +7,19 @@ import androidx.loader.app.LoaderManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import com.alttab.isotopeandroid.Adapters.DayPageViewAdapter;
 import com.alttab.isotopeandroid.R;
+import com.alttab.isotopeandroid.Tasks.AdaptiveLoaderCallbacks;
+import com.alttab.isotopeandroid.Tasks.AdaptiveTaskLoad;
+import com.alttab.isotopeandroid.database.Major;
 import com.alttab.isotopeandroid.database.Repository;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+
+import java.lang.ref.WeakReference;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -22,12 +28,12 @@ public class ScheduleActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private MotionLayout motionLayout;
     public static Repository mRepo;
+    private Major currentlySelectedMajor;
 
-    public static LoaderManager mLoaderManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Helper helper = Helper.getInstance(this);
+        final Helper helper = Helper.getInstance(this);
         setTheme(helper.getThemeStyle());
         helper.hideSystemUI(this.getWindow());
         super.onCreate(savedInstanceState);
@@ -46,10 +52,28 @@ public class ScheduleActivity extends AppCompatActivity {
             }
         });
 
+
+        final TextView majorName = findViewById(R.id.major_name);
+        final AdaptiveTaskLoad task = new AdaptiveTaskLoad(mRepo, null);
+        task.setCallbacks(new AdaptiveLoaderCallbacks<Major>() {
+            @Override
+            public void onExecute(WeakReference<Repository> wrRepo) {
+                String majorId = helper.getMajorId();
+                currentlySelectedMajor = wrRepo.get().getMajorById(majorId);
+            }
+
+            @Override
+            public void onPostExecute() {
+                if (currentlySelectedMajor != null)
+                    majorName.setText(currentlySelectedMajor.fullName);
+            }
+        });
+
+        task.execute();
+
         viewPager2 = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
-        mLoaderManager = LoaderManager.getInstance(this);
 
         viewPager2.setAdapter(new DayPageViewAdapter(this));
         new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {

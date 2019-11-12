@@ -2,19 +2,20 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="?attr/containerColor">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="240dp"
         android:background="?attr/BackgroundColor">
 
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/motion_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="?attr/actionBarSize"
+            android:minHeight="156dp"
             app:layoutDescription="@xml/header_animation"
             app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
 
