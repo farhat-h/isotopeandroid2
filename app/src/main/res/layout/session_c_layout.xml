@@ -103,6 +103,7 @@
             android:paddingBottom="8dp"
             android:text="%ROOM%"
             android:textAppearance="@style/font_session_chip"
+            android:textColor="?attr/session_c_chipText"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Subject" />
 
@@ -120,6 +121,7 @@
             android:paddingBottom="8dp"
             android:text="%REGIME%"
             android:textAppearance="@style/font_session_chip"
+            android:textColor="?attr/session_c_chipText"
             app:layout_constraintLeft_toRightOf="@id/SessionRoom"
             app:layout_constraintTop_toTopOf="@id/SessionRoom" />
 
@@ -130,6 +132,7 @@
             android:layout_marginTop="16dp"
             android:background="@drawable/session_chip_background"
             android:padding="8dp"
+
             android:text="%PROFESSOR NAME%"
             android:textAppearance="@style/font_session_chip"
             android:textColor="?attr/session_c_professorText"

@@ -74,7 +74,6 @@ public class ScheduleActivity extends AppCompatActivity {
         viewPager2 = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
-
         viewPager2.setAdapter(new DayPageViewAdapter(this));
         new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override

@@ -25,6 +25,7 @@
         <attr name="session_c_professorText" format="color" />
         <attr name="DividerColor" format="color" />
 
+        <attr name="emptySessionBackground" format="reference" />
 
     </declare-styleable>
 </resources>

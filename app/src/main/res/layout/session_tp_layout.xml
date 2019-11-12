@@ -103,6 +103,7 @@
             android:paddingBottom="8dp"
             android:text="%ROOM%"
             android:textAppearance="@style/font_session_chip"
+            android:textColor="?attr/session_tp_chipText"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toBottomOf="@id/Subject" />
 
@@ -119,7 +120,9 @@
             android:paddingRight="12dp"
             android:paddingBottom="8dp"
             android:text="%REGIME%"
+
             android:textAppearance="@style/font_session_chip"
+            android:textColor="?attr/session_tp_chipText"
             app:layout_constraintLeft_toRightOf="@id/SessionRoom"
             app:layout_constraintTop_toTopOf="@id/SessionRoom" />
 

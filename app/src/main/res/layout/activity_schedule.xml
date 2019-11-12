@@ -15,7 +15,7 @@
             android:id="@+id/motion_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:minHeight="156dp"
+            android:minHeight="125dp"
             app:layoutDescription="@xml/header_animation"
             app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
 
@@ -23,9 +23,9 @@
                 android:id="@+id/week_reference"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="This is an awefull hot coffee pot"
+                android:text="change"
                 android:textAppearance="@style/font_subtitle"
-                android:textColor="?attr/primaryTextColor" />
+                android:textColor="?attr/secondaryTextColor" />
 
             <TextView
                 android:id="@+id/major_name"
@@ -33,7 +33,32 @@
                 android:layout_height="wrap_content"
                 android:text="@string/major_pick_hint"
                 android:textAppearance="@style/font_major_name"
+                android:textColor="?attr/primaryTextColor"
                 android:textColorHint="?attr/primaryTextColor" />
+
+            <LinearLayout
+                android:id="@+id/week_reference_hidden"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="24dp"
+                    android:text="version"
+                    android:textAppearance="@style/font_display"
+                    android:textColor="?attr/primaryTextColor"
+                    android:textColorHint="?attr/primaryTextColor" />
+
+                <TextView
+                    android:id="@+id/schedule_version"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="11-11"
+                    android:textAppearance="@style/font_major_name"
+                    android:textColor="?attr/primaryTextColor" />
+            </LinearLayout>
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"

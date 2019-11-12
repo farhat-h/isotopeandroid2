@@ -30,6 +30,8 @@
         <item name="session_c_professorText">#E28940</item>
 
         <item name="DividerColor">#E5E5E5</item>
+        <item name="emptySessionBackground">@drawable/empty_sesh_light</item>
+
     </style>
 
     <style name="AppThemeDark" parent="Theme.AppCompat.DayNight.NoActionBar">
@@ -61,6 +63,7 @@
         <item name="session_c_professorText">#FFF</item>
 
         <item name="DividerColor">#000</item>
+        <item name="emptySessionBackground">@drawable/empty_sesh_dark</item>
     </style>
 
     <style name="font_title">
@@ -114,5 +117,11 @@
         <item name="android:textSize">18sp</item>
         <item name="android:textColor">?attr/primaryTextColor</item>
         <item name="android:capitalize">none</item>
+    </style>
+
+    <style name="font_display">
+        <item name="android:fontFamily">@font/cera_pro_regular</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">?attr/primaryTextColor</item>
     </style>
 </resources>

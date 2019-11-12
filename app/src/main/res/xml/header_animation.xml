@@ -1,49 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/tools">
     <Transition
         app:constraintSetEnd="@id/cs_header_end"
         app:constraintSetStart="@id/cs_header_start"
         app:duration="300">
-        <OnClick
-            app:clickAction="toggle"
-            app:targetId="@id/major_name" />
+
     </Transition>
 
 
     <ConstraintSet android:id="@+id/cs_header_start">
-        <Constraint
-            android:id="@id/week_reference"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="?attr/actionBarSize"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
+        <!-- MAJOR NAME FRAME_1  -->
         <Constraint
             android:id="@id/major_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/week_reference"
-            app:layout_constraintTop_toBottomOf="@id/week_reference" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="?attr/actionBarSize"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <!-- WEEK DAY FRAME_1  -->
+        <Constraint
+            android:id="@id/week_reference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintBottom_toTopOf="@+id/major_name"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <!-- HIDDEN WEEK REF FRAME_1  -->
+        <Constraint
+            android:id="@id/week_reference_hidden"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:translationX="-370dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/cs_header_end">
-        <Constraint
-            android:id="@id/week_reference"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="?attr/actionBarSize"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+        <!-- MAJOR NAME FRAME_2  -->
+
         <Constraint
             android:id="@id/major_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="@id/week_reference"
-            app:layout_constraintTop_toBottomOf="@id/week_reference" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="?attr/actionBarSize"
+            android:alpha="0"
+            android:translationX="200dp"
+            app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <!-- WEEK DAY FRAME_2  -->
+        <Constraint
+            android:id="@id/week_reference"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="20dp"
+            android:alpha="0"
+            android:translationX="200dp"
+            app:layout_constraintBottom_toTopOf="@+id/major_name"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            />
+
+        <!-- HIDDEN WEEK REF FRAME_2  -->
+        <Constraint
+            android:id="@id/week_reference_hidden"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="12dp"
+            android:translationX="0dp"
+            app:layout_constraintBottom_toTopOf="@+id/tabLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+
+            />
     </ConstraintSet>
 </MotionScene>

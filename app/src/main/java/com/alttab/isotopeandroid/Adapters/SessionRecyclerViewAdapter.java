@@ -17,9 +17,9 @@ import java.util.List;
 
 public class SessionRecyclerViewAdapter extends RecyclerView.Adapter<SessionViewHolder> {
 
-    private static final int ITEM_TP = 1;
-    private static final int ITEM_TD = 2;
-    private static final int ITEM_C = 3;
+    public static final int ITEM_TP = 1;
+    public static final int ITEM_TD = 2;
+    public static final int ITEM_C = 3;
 
     private Context mContext;
     private List<Session> sessionList;
@@ -85,11 +85,6 @@ public class SessionRecyclerViewAdapter extends RecyclerView.Adapter<SessionView
         if (sessionList != null)
             return sessionList.size();
         return 0;
-    }
-
-    public void updateData(List<Session> list) {
-        this.sessionList = list;
-        notifyDataSetChanged();
     }
 
 }

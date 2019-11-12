@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,9 +22,12 @@ import com.alttab.isotopeandroid.R;
 import com.alttab.isotopeandroid.ScheduleActivity;
 import com.alttab.isotopeandroid.Tasks.CustomSessionLoader;
 import com.alttab.isotopeandroid.Tasks.SessionLoaderCallbacks;
+import com.alttab.isotopeandroid.ViewHolders.SessionViewHolder;
 import com.alttab.isotopeandroid.database.Session;
 
 import java.util.List;
+
+import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,9 +38,15 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
     private RecyclerView recyclerView;
     private int currentDay;
     private SessionRecyclerViewAdapter adapter;
+    private RecyclerView.RecycledViewPool pool;
+
 
     public DayFragment() {
         // Required empty public constructor
+    }
+
+    public DayFragment(RecyclerView.RecycledViewPool pool) {
+        this.pool = pool;
     }
 
 
@@ -46,9 +56,11 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_day, container, false);
         recyclerView = view.findViewById(R.id.sessions_recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new SessionRecyclerViewAdapter(getContext(), null);
-        recyclerView.setAdapter(adapter);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
+        recyclerView.setLayoutManager(layoutManager);
+        if (this.pool != null) {
+            recyclerView.setRecycledViewPool(pool);
+        }
 
         return view;
     }
@@ -67,6 +79,7 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
 
     @Override
     public void onTaskDone(List<Session> objects) {
-        adapter.updateData(objects);
+        adapter = new SessionRecyclerViewAdapter(getContext(), objects);
+        recyclerView.setAdapter(adapter);
     }
 }
