@@ -27,6 +27,7 @@ public class DayPageViewAdapter extends FragmentStateAdapter {
         return dayFragment;
     }
 
+
     @Override
     public int getItemCount() {
         return Constants.DAYS.length;
