@@ -67,7 +67,7 @@ public class SessionRecyclerViewAdapter extends RecyclerView.Adapter<SessionView
         }
 
         View itemView = LayoutInflater.from(mContext).inflate(resource, parent, false);
-        return new SessionViewHolder(itemView);
+        return new SessionViewHolder(itemView, mContext);
     }
 
     @Override

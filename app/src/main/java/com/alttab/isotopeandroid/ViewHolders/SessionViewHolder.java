@@ -1,6 +1,7 @@
 package com.alttab.isotopeandroid.ViewHolders;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.TypedArray;
 import android.util.Log;
 import android.view.View;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.alttab.isotopeandroid.Alternatives;
 import com.alttab.isotopeandroid.Constants;
 import com.alttab.isotopeandroid.R;
 import com.alttab.isotopeandroid.database.Session;
@@ -18,7 +20,7 @@ import java.util.HashMap;
 
 import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
-public class SessionViewHolder extends RecyclerView.ViewHolder {
+public class SessionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
     private static HashMap<String, String> timeEnds;
     private static HashMap<String, String> timeStarts;
@@ -31,6 +33,8 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
     private TextView time;
     private TextView timeStart;
     private TextView timeEnd;
+
+    private Session mSession;
 
     public static HashMap<String, String> getTimeEnds() {
         if (timeEnds == null) {
@@ -52,10 +56,12 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
         return timeStarts;
     }
 
+    private Context mContext;
 
-    public SessionViewHolder(@NonNull View itemView) {
+    public SessionViewHolder(@NonNull View itemView, Context mContext) {
         super(itemView);
 
+        this.mContext = mContext;
 
         subject = itemView.findViewById(R.id.Subject);
 
@@ -73,10 +79,12 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
 
         timeEnd = itemView.findViewById(R.id.SessionTimeEnd);
 
+        itemView.setOnClickListener(this);
     }
 
     public void setmSession(Session mSession) {
 
+        this.mSession = mSession;
         time.setText(mSession.time);
         timeStart.setText(getTimeStarts().get(mSession.time));
         timeEnd.setText(getTimeEnds().get(mSession.time));
@@ -135,5 +143,14 @@ public class SessionViewHolder extends RecyclerView.ViewHolder {
 
         }
         return (bound.equals("start")) ? start : end;
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent intent = new Intent(mContext, Alternatives.class);
+        intent.putExtra(Alternatives.DAY, mSession.day);
+        intent.putExtra(Alternatives.TIME, mSession.time);
+        mContext.startActivity(intent);
+
     }
 }

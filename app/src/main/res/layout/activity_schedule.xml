@@ -81,4 +81,6 @@
         android:layout_height="wrap_content"
         android:background="?attr/containerColor"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+
+    <include />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -130,6 +130,12 @@
         <item name="android:textColor">?attr/primaryTextColor</item>
     </style>
 
+    <style name="font_display3">
+        <item name="android:fontFamily">@font/cera_pro_bold</item>
+        <item name="android:textSize">32sp</item>
+        <item name="android:textColor">?attr/primaryTextColor</item>
+    </style>
+
     <style name="font_display2">
         <item name="android:fontFamily">@font/cera_pro_bold</item>
         <item name="android:textSize">24sp</item>

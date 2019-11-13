@@ -10,8 +10,8 @@ import java.util.List;
 @Dao
 public interface SessionsDAO {
 
-    @Query("SELECT * FROM Sessions WHERE day==:day AND time ==:time AND majorId in (SELECT majorId from Majors where majorId <>:majorId)")
-    public List<Session> getAlternativeSessions(int day, String time, String majorId);
+    @Query("SELECT * FROM Sessions WHERE day==:day AND time ==:time AND majorId in (SELECT majorId from Majors where majorId <>:majorId AND majorName ==:majorName AND year==:year)")
+    public List<Session> getAlternativeSessions(int day, String time, String majorId, String majorName, String year);
 
 
     @Query("SELECT * FROM Sessions WHERE day ==:day AND majorId == :majorId")

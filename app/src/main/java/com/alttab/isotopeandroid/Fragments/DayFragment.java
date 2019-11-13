@@ -97,7 +97,7 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
 
         for (String time : Constants.TIMES) {
             if (!existingSessions.containsKey(time)) {
-                sessions.add(Session.createEmptySession(time));
+                sessions.add(Session.createEmptySession(time, this.currentDay));
             }
         }
         Collections.sort(sessions, sessionComparator);

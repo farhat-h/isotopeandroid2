@@ -28,6 +28,9 @@ public class CustomSessionLoader extends AsyncTask<Void, Void, Void> {
         return null;
     }
 
+
+    
+
     @Override
     protected void onPostExecute(Void aVoid) {
         callbacks.onTaskDone(objects);

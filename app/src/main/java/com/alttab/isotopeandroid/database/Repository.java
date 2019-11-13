@@ -24,8 +24,8 @@ public class Repository {
         return sessions.getDaySessions(majorId, day);
     }
 
-    public List<Session> getAlternativeSessions(int day, String majorId, String time) {
-        return sessions.getAlternativeSessions(day, time, majorId);
+    public List<Session> getAlternativeSessions(int day, String majorId, String time, String majorName, String year) {
+        return sessions.getAlternativeSessions(day, time, majorId, majorName, year);
     }
 
     public Major getMajorById(String majorId) {

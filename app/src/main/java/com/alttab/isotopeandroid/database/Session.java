@@ -18,12 +18,15 @@ import androidx.room.PrimaryKey;
 )
 public class Session {
 
-    public static Session createEmptySession(String time) {
-        Session s = new Session(EMPTY_ID, 0, time, null, null, null, null, null, 0, null);
+    public static Session createEmptySession(String time, int day) {
+        Session s = new Session(EMPTY_ID, day, time, null, null, null, null, null, 0, null);
         return s;
     }
 
     public static final String EMPTY_ID = "EMPTY_ID";
+    public static final String TYPE_TP = "TP";
+    public static final String TYPE_TD = "TD";
+    public static final String TYPE_C = "C";
     @NonNull
     @PrimaryKey
     public final String sessionId;

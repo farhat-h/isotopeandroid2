@@ -29,8 +29,7 @@ public class ScheduleActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private MotionLayout motionLayout;
     public static Repository mRepo;
-    private Major currentlySelectedMajor;
-
+    public static Major currentlySelectedMajor;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,9 +68,7 @@ public class ScheduleActivity extends AppCompatActivity {
                     majorName.setText(currentlySelectedMajor.fullName);
             }
         });
-
         task.execute();
-
         viewPager2 = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
 
@@ -83,7 +80,7 @@ public class ScheduleActivity extends AppCompatActivity {
             }
         }).attach();
 
-        tabLayout.getTabAt(getDayNumber() - 1).select();
+        tabLayout.getTabAt(getDayNumber() - 2).select();
 
     }
 
