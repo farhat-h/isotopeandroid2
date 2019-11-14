@@ -23,7 +23,6 @@ import com.alttab.isotopeandroid.R;
 import com.alttab.isotopeandroid.ScheduleActivity;
 import com.alttab.isotopeandroid.Tasks.CustomSessionLoader;
 import com.alttab.isotopeandroid.Tasks.SessionLoaderCallbacks;
-import com.alttab.isotopeandroid.ViewHolders.SessionViewHolder;
 import com.alttab.isotopeandroid.database.Session;
 
 import java.util.Collections;
@@ -31,7 +30,6 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-import static androidx.constraintlayout.motion.widget.MotionScene.TAG;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -104,4 +102,5 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
         adapter = new SessionRecyclerViewAdapter(getContext(), sessions);
         recyclerView.setAdapter(adapter);
     }
+
 }

@@ -66,6 +66,12 @@ public class Helper {
         editor.commit();
     }
 
+
+    public void resetMajor() {
+        editor.remove(MAJOR_ID);
+        editor.apply();
+    }
+
     public void hideSystemUI(Window w) {
         // Set the IMMERSIVE flag.
         // Set the content to appear under the system bars so that the content

@@ -10,7 +10,7 @@
         <item name="containerColor">#FFF</item>
         <item name="BackgroundColor">#EEEEEE</item>
         <item name="primaryTextColor">#121726</item>
-        <item name="secondaryTextColor">#C7C7C7</item>
+        <item name="secondaryTextColor">#B7B7B7</item>
 
         <item name="session_tp_background">#FFBEE2</item>
         <item name="session_tp_subject">#C46B9C</item>

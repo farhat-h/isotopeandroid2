@@ -66,7 +66,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         MajorAutocompleteAdapter adapter = new MajorAutocompleteAdapter(this, R.layout.major_autocomplete_item_layout, majorList);
         mMajorSelect.setAdapter(adapter);
         mMajorSelect.setOnItemClickListener(this);
-
     }
 
     public void toggleTheme(View view) {
@@ -77,8 +76,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Major major = (Major) parent.getItemAtPosition(position);
-        Log.e("SELEET", "onItemSelected: " + major.toString());
-
         helper.setMajorId(major.majorId);
         // navigate to next
         Intent intent = new Intent(this, ScheduleActivity.class);

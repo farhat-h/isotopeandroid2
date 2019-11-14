@@ -1,24 +1,21 @@
 package com.alttab.isotopeandroid.ViewHolders;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.res.TypedArray;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.alttab.isotopeandroid.Alternatives;
 import com.alttab.isotopeandroid.Constants;
+import com.alttab.isotopeandroid.Fragments.AlternativesSheetFragment;
 import com.alttab.isotopeandroid.R;
 import com.alttab.isotopeandroid.database.Session;
 
 import java.util.HashMap;
 
-import static androidx.constraintlayout.motion.utils.Oscillator.TAG;
 
 public class SessionViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
@@ -99,7 +96,7 @@ public class SessionViewHolder extends RecyclerView.ViewHolder implements View.O
         }
     }
 
-    private String extractSubjectName(String subject) {
+    private static String extractSubjectName(String subject) {
         subject = subject.replaceAll("(\\(.*\\))", "");
         // Pattern p = Pattern.compile("-(.*?)-");
 
@@ -147,10 +144,8 @@ public class SessionViewHolder extends RecyclerView.ViewHolder implements View.O
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(mContext, Alternatives.class);
-        intent.putExtra(Alternatives.DAY, mSession.day);
-        intent.putExtra(Alternatives.TIME, mSession.time);
-        mContext.startActivity(intent);
-
+        AlternativesSheetFragment fragment = new AlternativesSheetFragment(mSession.day, mSession.time, mContext);
+        FragmentActivity act = (FragmentActivity) mContext;
+        fragment.show(act.getSupportFragmentManager(), "ALTERNATIVES");
     }
 }

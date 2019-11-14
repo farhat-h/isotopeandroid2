@@ -19,13 +19,20 @@
             app:layoutDescription="@xml/header_animation"
             app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
 
-            <TextView
-                android:id="@+id/week_reference"
+            <ImageView
+                android:id="@+id/edit_major"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="change"
-                android:textAppearance="@style/font_subtitle"
-                android:textColor="?attr/secondaryTextColor" />
+                android:layout_margin="16dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:focusable="true"
+                android:onClick="backToMajorSelect"
+                android:padding="8dp"
+                android:src="@drawable/ic_edit"
+                app:layout_constraintBottom_toBottomOf="@id/major_name"
+                app:layout_constraintLeft_toRightOf="@id/major_name"
+                app:layout_constraintTop_toTopOf="@id/major_name" />
 
             <TextView
                 android:id="@+id/major_name"
@@ -81,6 +88,4 @@
         android:layout_height="wrap_content"
         android:background="?attr/containerColor"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <include />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

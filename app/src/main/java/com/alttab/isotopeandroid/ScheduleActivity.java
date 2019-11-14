@@ -6,7 +6,9 @@ import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.loader.app.LoaderManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.alttab.isotopeandroid.Adapters.DayPageViewAdapter;
@@ -30,10 +32,11 @@ public class ScheduleActivity extends AppCompatActivity {
     private MotionLayout motionLayout;
     public static Repository mRepo;
     public static Major currentlySelectedMajor;
+    private Helper helper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        final Helper helper = Helper.getInstance(this);
+        helper = Helper.getInstance(this);
         setTheme(helper.getThemeStyle());
         helper.hideSystemUI(this.getWindow());
         super.onCreate(savedInstanceState);
@@ -89,4 +92,9 @@ public class ScheduleActivity extends AppCompatActivity {
         return calendar.get(Calendar.DAY_OF_WEEK);
     }
 
+    public void backToMajorSelect(View view) {
+        helper.resetMajor();
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+    }
 }

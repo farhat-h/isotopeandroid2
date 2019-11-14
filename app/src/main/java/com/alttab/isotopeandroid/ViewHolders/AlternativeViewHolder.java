@@ -1,5 +1,6 @@
 package com.alttab.isotopeandroid.ViewHolders;
 
+import android.content.Context;
 import android.view.View;
 import android.widget.TextView;
 
@@ -11,6 +12,7 @@ import com.alttab.isotopeandroid.database.Session;
 
 public class AlternativeViewHolder extends RecyclerView.ViewHolder {
 
+    private Context mContext;
     private TextView subject;
     private TextView type;
     private TextView room;
@@ -32,6 +34,7 @@ public class AlternativeViewHolder extends RecyclerView.ViewHolder {
         professor = itemView.findViewById(R.id.SessionProfessor);
 
         time = itemView.findViewById(R.id.SessionTimeNumber);
+
     }
 
     public void bind(Session mSession) {
