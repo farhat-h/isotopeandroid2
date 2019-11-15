@@ -33,6 +33,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias=".27" />
 
+
     <AutoCompleteTextView
 
         android:id="@+id/majors_autocomplete"
@@ -44,9 +45,51 @@
         android:textAppearance="@style/font_input"
         android:textColor="?attr/primaryTextColor"
         android:textColorHint="?attr/secondaryTextColor"
-
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@id/pick_major_title" />
+
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/subgroup_motionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        app:layoutDescription="@xml/subgroup_select"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/majors_autocomplete">
+
+        <View
+            android:id="@+id/subgroup_selector"
+            android:layout_width="64dp"
+            android:layout_height="24dp"
+            android:background="?attr/colorPrimary" />
+
+        <TextView
+            android:id="@+id/subgroup_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Group 1"
+            android:onClick="handleSelectG1"
+            android:textAppearance="@style/font_display2"
+            android:textColor="?attr/primaryTextColor"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/subgroup_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:text="Group 2"
+            android:textAppearance="@style/font_display2"
+            android:onClick="handleSelectG2"
+
+            android:textColor="?attr/primaryTextColor"
+            android:textSize="24dp" />
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

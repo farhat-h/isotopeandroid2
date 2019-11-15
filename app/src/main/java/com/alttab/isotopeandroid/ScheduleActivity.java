@@ -3,7 +3,6 @@ package com.alttab.isotopeandroid;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.motion.widget.MotionLayout;
-import androidx.loader.app.LoaderManager;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
@@ -12,7 +11,6 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.alttab.isotopeandroid.Adapters.DayPageViewAdapter;
-import com.alttab.isotopeandroid.R;
 import com.alttab.isotopeandroid.Tasks.AdaptiveLoaderCallbacks;
 import com.alttab.isotopeandroid.Tasks.AdaptiveTaskLoad;
 import com.alttab.isotopeandroid.database.Major;
@@ -23,6 +21,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 
 import java.lang.ref.WeakReference;
 import java.util.Calendar;
+import java.util.Objects;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -76,14 +75,17 @@ public class ScheduleActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tabLayout);
 
         viewPager2.setAdapter(new DayPageViewAdapter(this));
-        new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+        TabLayoutMediator tabViewMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
             public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
                 tab.setText(Constants.DAYS[position]);
             }
-        }).attach();
 
+        });
+
+        tabViewMediator.attach();
         tabLayout.getTabAt(getDayNumber() - 2).select();
+        tabLayout.setScrollPosition(getDayNumber() - 2, 0f, true);
 
     }
 
