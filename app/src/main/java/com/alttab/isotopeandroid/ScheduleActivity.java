@@ -41,7 +41,7 @@ public class ScheduleActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
         mRepo = new Repository(getApplication());
-
+        mRepo.setSubgroup(helper.getSubgroup());
         motionLayout = findViewById(R.id.motion_layout);
         appBarLayout = findViewById(R.id.appBarLayout);
         appBarLayout.setOutlineProvider(null);
@@ -84,9 +84,11 @@ public class ScheduleActivity extends AppCompatActivity {
         });
 
         tabViewMediator.attach();
-        tabLayout.getTabAt(getDayNumber() - 2).select();
-        tabLayout.setScrollPosition(getDayNumber() - 2, 0f, true);
-
+        int dayNumber = getDayNumber() - 2;
+        dayNumber = dayNumber % 7;
+        if (tabLayout.getTabAt(dayNumber) != null)
+            tabLayout.getTabAt(dayNumber).select();
+        tabLayout.setScrollPosition(dayNumber, 0f, true);
     }
 
     private int getDayNumber() {

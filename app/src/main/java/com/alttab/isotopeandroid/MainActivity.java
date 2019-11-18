@@ -1,18 +1,21 @@
 package com.alttab.isotopeandroid;
 
+import androidx.annotation.ColorInt;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
 
 import android.content.Intent;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.alttab.isotopeandroid.Adapters.MajorAutocompleteAdapter;
@@ -28,9 +31,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Repository mRepo;
     private static final int LOADER_ID = 242;
     private Helper helper;
-    private MotionLayout mMotionLayout;
     private static final int STATE_SELECT_GROUP = 1;
     private static final int STATE_INITIAL = 0;
+
+    @ColorInt
+    private int backgroundColor;
+
+    @ColorInt
+    private int primaryTextColor;
+
+    @ColorInt
+    private int secondaryTextColor;
+    private TextView tvGroup1, tvGroup2, tvTitle, tvSelectedMajor;
+    private LinearLayout selectGroupLayout;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +53,30 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         helper.hideSystemUI(this.getWindow());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mRepo = new Repository(getApplication());
+        mRepo.setSubgroup(helper.getSubgroup());
         LoaderManager.getInstance(this).initLoader(LOADER_ID, null, getCallbacks());
-        mMotionLayout = findViewById(R.id.subgroup_motionLayout);
+
+        tvGroup1 = findViewById(R.id.subgroup_1);
+        tvGroup2 = findViewById(R.id.subgroup_2);
+        tvTitle = findViewById(R.id.pick_major_title);
+        tvSelectedMajor = findViewById(R.id.selected_major);
+        selectGroupLayout = findViewById(R.id.group_select_container);
+        tvSelectedMajor = findViewById(R.id.selected_major);
+
+
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = getTheme();
+
+        theme.resolveAttribute(R.attr.BackgroundColor, typedValue, true);
+        backgroundColor = typedValue.data;
+
+        theme.resolveAttribute(R.attr.primaryTextColor, typedValue, true);
+        primaryTextColor = typedValue.data;
+
+        theme.resolveAttribute(R.attr.secondaryTextColor, typedValue, true);
+        secondaryTextColor = typedValue.data;
     }
 
 
@@ -82,40 +117,41 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         Major major = (Major) parent.getItemAtPosition(position);
 
         TextView tvTitle = findViewById(R.id.pick_major_title);
-        tvTitle.setText(major.fullName);
-
         helper.setMajorId(major.majorId);
-        setUIState(STATE_SELECT_GROUP);
+        helper.setSubgroup(1);
 
-        //Intent intent = new Intent(this, ScheduleActivity.class);
-        //startActivity(intent);
+        helper.hideKeyboard(this);
+        tvSelectedMajor.setText(major.fullName);
+        tvTitle.setVisibility(View.GONE);
+        mMajorSelect.setVisibility(View.GONE);
+        selectGroupLayout.setVisibility(View.VISIBLE);
+        tvSelectedMajor.setVisibility(View.VISIBLE);
     }
 
-    private void setUIState(final int state) {
-        switch (state) {
-            case STATE_INITIAL:
-                break;
-            case STATE_SELECT_GROUP:
-                _setSelectGroupUI();
-        }
+    private void _selectGroup(int group) {
+        helper.setSubgroup(group);
     }
 
-    private void _setSelectGroupUI() {
-        mMotionLayout.setVisibility(View.VISIBLE);
+    public void selectGroup2(View view) {
+        int subgroup = 2;
+        _selectGroup(subgroup);
+        tvGroup2.setBackgroundColor(backgroundColor);
+        tvGroup2.setTextColor(primaryTextColor);
+
+        tvGroup1.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        tvGroup1.setTextColor(secondaryTextColor);
     }
 
-    private void setSubGroup(int subGroup) {
-        helper.setSubgroup(subGroup);
-    }
+    public void selectGroup1(View view) {
+        int subgroup = 1;
+        _selectGroup(subgroup);
+        tvGroup1.setBackgroundColor(backgroundColor);
+        tvGroup1.setTextColor(primaryTextColor);
 
-    public void handleSelectG1(View view) {
-        setSubGroup(1);
-        mMotionLayout.transitionToStart();
-    }
+        tvGroup2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+        tvGroup2.setTextColor(secondaryTextColor);
 
-    public void handleSelectG2(View view) {
-        setSubGroup(2);
-        mMotionLayout.transitionToEnd();
-
+        Intent intent = new Intent(this, ScheduleActivity.class);
+        startActivity(intent);
     }
 }
