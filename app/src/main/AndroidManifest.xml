@@ -9,8 +9,15 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Alternatives"></activity>
-        <activity android:name=".ScheduleActivity"></activity>
+        <activity android:name=".Initializer">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".Alternatives" />
+        <activity android:name=".ScheduleActivity" />
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustResize">

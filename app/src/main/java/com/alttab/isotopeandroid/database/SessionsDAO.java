@@ -23,6 +23,8 @@ public interface SessionsDAO {
             "SELECT time from Sessions WHERE day==:day AND majorId==:majorId and subGroup==2)")
     public List<Session> getSecondGroupSessions(String majorId, int day);
 
+
+
 }
 
 

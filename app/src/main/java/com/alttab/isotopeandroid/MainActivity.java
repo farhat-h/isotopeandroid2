@@ -31,8 +31,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Repository mRepo;
     private static final int LOADER_ID = 242;
     private Helper helper;
-    private static final int STATE_SELECT_GROUP = 1;
-    private static final int STATE_INITIAL = 0;
 
     @ColorInt
     private int backgroundColor;
@@ -42,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     @ColorInt
     private int secondaryTextColor;
-    private TextView tvGroup1, tvGroup2, tvTitle, tvSelectedMajor;
+    private TextView tvGroup1, tvGroup2, tvTitle, tvSelectedMajor, tvNext, tvCancel;
     private LinearLayout selectGroupLayout;
 
 
@@ -61,6 +59,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         tvGroup1 = findViewById(R.id.subgroup_1);
         tvGroup2 = findViewById(R.id.subgroup_2);
         tvTitle = findViewById(R.id.pick_major_title);
+        tvNext = findViewById(R.id.major_select_next);
+        tvCancel = findViewById(R.id.major_select_cancel);
+
         tvSelectedMajor = findViewById(R.id.selected_major);
         selectGroupLayout = findViewById(R.id.group_select_container);
         tvSelectedMajor = findViewById(R.id.selected_major);
@@ -119,13 +120,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         TextView tvTitle = findViewById(R.id.pick_major_title);
         helper.setMajorId(major.majorId);
         helper.setSubgroup(1);
-
         helper.hideKeyboard(this);
-        tvSelectedMajor.setText(major.fullName);
+
+        setUIStateGroupSelect(major.fullName);
+    }
+
+    private void setUIStateInitial() {
+        tvNext.setVisibility(View.GONE);
+        tvCancel.setVisibility(View.GONE);
+
+        tvSelectedMajor.setText("");
+        tvTitle.setVisibility(View.VISIBLE);
+        mMajorSelect.setVisibility(View.VISIBLE);
+        selectGroupLayout.setVisibility(View.GONE);
+        tvSelectedMajor.setVisibility(View.GONE);
+
+    }
+
+    private void setUIStateGroupSelect(String majorFullName) {
+        tvNext.setVisibility(View.VISIBLE);
+        tvCancel.setVisibility(View.VISIBLE);
+
+        tvSelectedMajor.setText(majorFullName);
         tvTitle.setVisibility(View.GONE);
         mMajorSelect.setVisibility(View.GONE);
         selectGroupLayout.setVisibility(View.VISIBLE);
         tvSelectedMajor.setVisibility(View.VISIBLE);
+
     }
 
     private void _selectGroup(int group) {
@@ -151,7 +172,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         tvGroup2.setBackgroundColor(getResources().getColor(android.R.color.transparent));
         tvGroup2.setTextColor(secondaryTextColor);
 
-        Intent intent = new Intent(this, ScheduleActivity.class);
-        startActivity(intent);
+    }
+
+    public void confirm(View view) {
+        Intent scheduleIntent = new Intent(this, ScheduleActivity.class);
+        startActivity(scheduleIntent);
+    }
+
+    public void cancel(View view) {
+        setUIStateInitial();
     }
 }

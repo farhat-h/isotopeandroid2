@@ -20,9 +20,26 @@ public class Helper {
 
     private static final String INITIALIZED = "KEY_INIT";
     private static final String IS_DARK_MODE = "KEY_INIT";
+    private static final String DATABASE_VERSION = "DATABASE_VERSION";
 
     private static final String MAJOR_ID = "KEY_MAJOR";
     private static final String SUBGROUP_KEY = "KEY_SUBGROUP";
+
+
+    public String getLastDatabaseVersion() {
+        return preferences.getString(DATABASE_VERSION, "");
+    }
+
+    public boolean updateDatabaseVersion(String version) {
+        String previous = getLastDatabaseVersion();
+        if (!previous.equals(version)) {
+            editor.putString(DATABASE_VERSION, version);
+            editor.apply();
+            return true;
+        }
+
+        return false;
+    }
 
     public static Helper _instance;
     private SharedPreferences preferences;
@@ -37,13 +54,23 @@ public class Helper {
                     app.getSharedPreferences("settings", Context.MODE_PRIVATE);
             SharedPreferences.Editor editor = sharedPreferences.edit();
             if (!sharedPreferences.contains(INITIALIZED)) {
-                editor.putBoolean(INITIALIZED, true);
+                editor.putBoolean(INITIALIZED, false);
+                editor.putString(DATABASE_VERSION, "");
                 editor.putBoolean(IS_DARK_MODE, false);
-                editor.apply();
+                editor.commit();
             }
             _instance = new Helper(sharedPreferences, editor);
         }
         return _instance;
+    }
+
+    public boolean getIsInitialized() {
+        return preferences.getBoolean(INITIALIZED, false);
+    }
+
+    public void setIsInitialized(boolean init) {
+        editor.putBoolean(INITIALIZED, init);
+        editor.commit();
     }
 
     private Helper(SharedPreferences sp, SharedPreferences.Editor ed) {
@@ -88,7 +115,7 @@ public class Helper {
         editor.apply();
     }
 
-    public  void hideKeyboard(Activity act) {
+    public void hideKeyboard(Activity act) {
         View view = act.getCurrentFocus();
         if (view != null) {
             InputMethodManager inputManager = (InputMethodManager) act.getSystemService(Context.INPUT_METHOD_SERVICE);
