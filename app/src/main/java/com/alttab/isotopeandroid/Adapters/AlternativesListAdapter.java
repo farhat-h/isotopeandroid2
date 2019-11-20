@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.alttab.isotopeandroid.R;
 import com.alttab.isotopeandroid.ViewHolders.AlternativeViewHolder;
+import com.alttab.isotopeandroid.database.NamedSession;
 import com.alttab.isotopeandroid.database.Session;
 
 import java.util.List;
@@ -17,9 +18,9 @@ import java.util.List;
 public class AlternativesListAdapter extends RecyclerView.Adapter<AlternativeViewHolder> {
 
     private Context mContext;
-    private List<Session> sessionList;
+    private List<NamedSession> sessionList;
 
-    public AlternativesListAdapter(Context mContext, List<Session> sessionList) {
+    public AlternativesListAdapter(Context mContext, List<NamedSession> sessionList) {
         this.mContext = mContext;
         this.sessionList = sessionList;
     }
@@ -27,7 +28,7 @@ public class AlternativesListAdapter extends RecyclerView.Adapter<AlternativeVie
 
     @Override
     public int getItemViewType(int position) {
-        final Session s = sessionList.get(position);
+        final NamedSession s = sessionList.get(position);
         int viewTypeResource = -1;
 
         switch (s.type) {

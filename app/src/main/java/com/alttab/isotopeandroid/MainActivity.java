@@ -15,6 +15,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AutoCompleteTextView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -31,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Repository mRepo;
     private static final int LOADER_ID = 242;
     private Helper helper;
+    private ImageView themeToggle;
 
     @ColorInt
     private int backgroundColor;
@@ -65,7 +67,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         tvSelectedMajor = findViewById(R.id.selected_major);
         selectGroupLayout = findViewById(R.id.group_select_container);
         tvSelectedMajor = findViewById(R.id.selected_major);
-
+        themeToggle = findViewById(R.id.theme_toggle);
 
         TypedValue typedValue = new TypedValue();
         Resources.Theme theme = getTheme();
@@ -108,6 +110,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mMajorSelect.setAdapter(adapter);
         mMajorSelect.setOnItemClickListener(this);
     }
+
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Major major = (Major) parent.getItemAtPosition(position);
@@ -178,5 +181,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void cancel(View view) {
         setUIStateInitial();
+    }
+
+    public void toggleTheme(View view) {
+        helper.toggleActivityTheme(this);
     }
 }

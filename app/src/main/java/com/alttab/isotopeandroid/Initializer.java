@@ -101,7 +101,12 @@ public class Initializer extends AppCompatActivity implements SuccessFailCallbac
 
     @Override
     public void onSuccess() {
-
+        DownloadDatabaseSync remoteVersionHandler = new DownloadDatabaseSync(this);
+        try {
+            helper.updateDatabaseVersion(remoteVersionHandler.getVersion());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

@@ -33,7 +33,7 @@ public class Repository {
             return sessions.getSecondGroupSessions(majorId, day);
     }
 
-    public List<Session> getAlternativeSessions(int day, String majorId, String time, String majorName, String year) {
+    public List<NamedSession> getAlternativeSessions(int day, String majorId, String time, String majorName, String year) {
         return sessions.getAlternativeSessions(day, time, majorId, majorName, year);
     }
 

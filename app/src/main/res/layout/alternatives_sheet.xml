@@ -4,9 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/BackgroundColor"
-    tools:context=".Alternatives">
-
+    android:background="?attr/BackgroundColor">
     <LinearLayout
         android:id="@+id/alternatives_header"
         android:layout_width="wrap_content"
@@ -47,6 +45,36 @@
                 android:textAppearance="@style/font_display" />
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/alternatives_empty_state"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alternatives_header">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:text="😅"
+            android:textAppearance="@style/font_title"
+            android:textColor="?attr/secondaryTextColor" />
+
+        <TextView
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/cera_pro_medium"
+            android:text="no alternatives found for this session"
+            android:textAlignment="center"
+            android:textColor="?attr/secondaryTextColor"
+            android:textSize="14dp" />
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

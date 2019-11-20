@@ -32,7 +32,7 @@
 
         <item name="DividerColor">#E5E5E5</item>
         <item name="emptySessionBackground">@drawable/empty_sesh_light</item>
-
+        <item name="themeToggleIcon">@drawable/ic_sun</item>
         <item name="android:windowBackground">@drawable/idk</item>
         <item name="android:colorBackground">#FFF</item>
         <item name="windowNoTitle">true</item>
@@ -59,6 +59,7 @@
         <item name="session_td_chipBackground">#25C376</item>
         <item name="session_td_chipText">#172126</item>
         <item name="session_td_professorText">#FFF</item>
+        <item name="themeToggleIcon">@drawable/ic_moon</item>
 
         <item name="session_c_background">#FFD740</item>
         <item name="session_c_subject">#172126</item>

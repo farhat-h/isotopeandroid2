@@ -1,4 +1,5 @@
 package com.alttab.isotopeandroid;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -53,7 +54,7 @@ public class Helper {
                 editor.putBoolean(INITIALIZED, false);
                 editor.putString(DATABASE_VERSION, "");
                 editor.putBoolean(IS_DARK_MODE, false);
-                editor.commit();
+                editor.apply();
             }
             _instance = new Helper(sharedPreferences, editor);
         }
@@ -108,6 +109,7 @@ public class Helper {
 
     public void resetMajor() {
         editor.remove(MAJOR_ID);
+        editor.remove(INITIALIZED);
         editor.apply();
     }
 
@@ -129,6 +131,7 @@ public class Helper {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
         w.setStatusBarColor(R.attr.BackgroundColor);
     }
+
     public void toggleActivityTheme(Activity activity) {
         toggleDarkMode();
         Intent intent = activity.getIntent();

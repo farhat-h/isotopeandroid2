@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.alttab.isotopeandroid.R;
+import com.alttab.isotopeandroid.database.NamedSession;
 import com.alttab.isotopeandroid.database.Session;
 
 public class AlternativeViewHolder extends RecyclerView.ViewHolder {
@@ -19,6 +20,7 @@ public class AlternativeViewHolder extends RecyclerView.ViewHolder {
     private TextView regime;
     private TextView professor;
     private TextView time;
+    private TextView majorFullName;
 
     public AlternativeViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -35,17 +37,17 @@ public class AlternativeViewHolder extends RecyclerView.ViewHolder {
 
         time = itemView.findViewById(R.id.SessionTimeNumber);
 
+        majorFullName = itemView.findViewById(R.id.MajorFullName);
     }
 
-    public void bind(Session mSession) {
+    public void bind(NamedSession mSession) {
         if (!mSession.sessionId.equals(Session.EMPTY_ID)) {
-
             subject.setText(extractSubjectName(mSession.subject));
             type.setText(mSession.type);
             room.setText(mSession.room);
             regime.setText(mSession.regime);
             professor.setText(mSession.professor);
-
+            majorFullName.setText(mSession.fullName);
         }
     }
 

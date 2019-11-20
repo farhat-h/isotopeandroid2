@@ -83,24 +83,32 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
 
     @Override
     public void onResults(List<Session> objects) {
+        if (objects.size() > 0) {
+            HashMap<String, Boolean> existingSessions = new HashMap<>();
+            for (Session s : objects) {
+                existingSessions.put(s.time, true);
+            }
+
+            for (String time : Constants.TIMES) {
+                if (!existingSessions.containsKey(time)) {
+                    objects.add(Session.createEmptySession(time, this.currentDay));
+                }
+            }
+            Collections.sort(objects, sessionComparator);
+        }
+
     }
 
     @Override
     public void onTaskDone(List<Session> sessions) {
-
-        HashMap<String, Boolean> existingSessions = new HashMap<>();
-        for (Session s : sessions) {
-            existingSessions.put(s.time, true);
+        if (sessions.size() > 0) {
+            adapter = new SessionRecyclerViewAdapter(getContext(), sessions);
+            recyclerView.setAdapter(adapter);
+        } else {
+            recyclerView.setVisibility(View.GONE);
         }
 
-        for (String time : Constants.TIMES) {
-            if (!existingSessions.containsKey(time)) {
-                sessions.add(Session.createEmptySession(time, this.currentDay));
-            }
-        }
-        Collections.sort(sessions, sessionComparator);
-        adapter = new SessionRecyclerViewAdapter(getContext(), sessions);
-        recyclerView.setAdapter(adapter);
+
     }
 
 }

@@ -14,6 +14,7 @@ import okhttp3.Response;
 
 public class DownloadDatabaseSync {
     private static final String downloadUrl = "http://137.74.192.93/api/getLastDatabaseVersion";
+    private static final String versionURL = "http://137.74.192.93/api/version";
     private OkHttpClient client;
     private File databaseFile;
 
@@ -43,6 +44,15 @@ public class DownloadDatabaseSync {
 
     public boolean download() throws IOException {
         return download(downloadUrl);
+    }
+
+    public String getVersion() throws IOException {
+        Request request = new Request.Builder()
+                .url(versionURL)
+                .build();
+
+        Response response = client.newCall(request).execute();
+        return response.body().string();
     }
 
     private void copyStreamToFile(InputStream in, FileOutputStream out) {

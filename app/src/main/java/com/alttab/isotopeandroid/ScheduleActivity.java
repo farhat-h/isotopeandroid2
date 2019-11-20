@@ -8,6 +8,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alttab.isotopeandroid.Adapters.DayPageViewAdapter;
@@ -33,6 +34,7 @@ public class ScheduleActivity extends AppCompatActivity {
     public static Major currentlySelectedMajor;
     private Helper helper;
     private TextView databaseVersion;
+    private ImageView themeToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,7 @@ public class ScheduleActivity extends AppCompatActivity {
         if (tabLayout.getTabAt(dayNumber) != null)
             tabLayout.getTabAt(dayNumber).select();
         tabLayout.setScrollPosition(dayNumber, 0f, true);
+        themeToggle = findViewById(R.id.schedule_theme_toggle);
     }
 
     private int getDayNumber() {
@@ -103,5 +106,9 @@ public class ScheduleActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    public void scheduleToggleTheme(View view) {
+        helper.toggleActivityTheme(this);
     }
 }
