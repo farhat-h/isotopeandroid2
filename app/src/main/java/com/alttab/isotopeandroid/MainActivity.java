@@ -108,11 +108,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mMajorSelect.setAdapter(adapter);
         mMajorSelect.setOnItemClickListener(this);
     }
-
-    public void toggleTheme(View view) {
-        helper.toggleActivityTheme(this);
-    }
-
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Major major = (Major) parent.getItemAtPosition(position);
@@ -175,8 +170,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void confirm(View view) {
+        helper.setIsInitialized(true);
         Intent scheduleIntent = new Intent(this, ScheduleActivity.class);
         startActivity(scheduleIntent);
+        finish();
     }
 
     public void cancel(View view) {

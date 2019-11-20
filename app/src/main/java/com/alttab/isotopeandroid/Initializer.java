@@ -80,7 +80,6 @@ public class Initializer extends AppCompatActivity implements SuccessFailCallbac
         if (!databaseFile.exists()) {
             downloadFile();
         } else {
-
             Intent intent;
             if (helper.getIsInitialized())
                 intent = new Intent(this, ScheduleActivity.class);

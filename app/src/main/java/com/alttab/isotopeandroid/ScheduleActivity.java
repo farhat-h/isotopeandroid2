@@ -32,6 +32,7 @@ public class ScheduleActivity extends AppCompatActivity {
     public static Repository mRepo;
     public static Major currentlySelectedMajor;
     private Helper helper;
+    private TextView databaseVersion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +46,8 @@ public class ScheduleActivity extends AppCompatActivity {
         motionLayout = findViewById(R.id.motion_layout);
         appBarLayout = findViewById(R.id.appBarLayout);
         appBarLayout.setOutlineProvider(null);
+        databaseVersion = findViewById(R.id.schedule_version);
+        databaseVersion.setText(helper.getLastDatabaseVersion().replace(".sqlite", ""));
 
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -73,7 +76,6 @@ public class ScheduleActivity extends AppCompatActivity {
         task.execute();
         viewPager2 = findViewById(R.id.viewPager);
         tabLayout = findViewById(R.id.tabLayout);
-
         viewPager2.setAdapter(new DayPageViewAdapter(this));
         TabLayoutMediator tabViewMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
             @Override
@@ -100,5 +102,6 @@ public class ScheduleActivity extends AppCompatActivity {
         helper.resetMajor();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        finish();
     }
 }

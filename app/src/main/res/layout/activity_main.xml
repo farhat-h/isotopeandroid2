@@ -9,18 +9,6 @@
 
     android:paddingRight="36dp"
     tools:context=".MainActivity">
-
-
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="64dp"
-        android:onClick="toggleTheme"
-        android:text="dark"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <TextView
         android:id="@+id/pick_major_title"
         android:layout_width="240dp"
@@ -66,20 +54,22 @@
 
     <LinearLayout
         android:id="@+id/group_select_container"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         android:visibility="gone"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/majors_autocomplete"
         app:layout_constraintTop_toBottomOf="@id/selected_major">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginRight="36dp"
+            android:gravity="left"
+            android:layout_marginRight="24dp"
             android:text="Group"
-            android:textAppearance="@style/font_display" />
+            android:textAppearance="@style/font_display"
+            android:textSize="24dp" />
 
         <TextView
             android:id="@+id/subgroup_1"

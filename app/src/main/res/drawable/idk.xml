@@ -6,6 +6,5 @@
         android:width="95dp"
         android:height="128dp"
         android:drawable="@drawable/ic_shape_only"
-        android:gravity="center"></item>
-
+        android:gravity="center" />
 </layer-list>
