@@ -31,7 +31,6 @@ public class MajorListLoader extends AsyncTaskLoader<List<Major>> {
     @Nullable
     @Override
     public List<Major> loadInBackground() {
-        Log.e("WORKING", "loadInBackground: ");
         return this.repository.get().getAllMajors();
     }
 }

@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -33,8 +34,6 @@ public class ScheduleActivity extends AppCompatActivity {
     public static Repository mRepo;
     public static Major currentlySelectedMajor;
     private Helper helper;
-    private TextView databaseVersion;
-    private ImageView themeToggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +47,6 @@ public class ScheduleActivity extends AppCompatActivity {
         motionLayout = findViewById(R.id.motion_layout);
         appBarLayout = findViewById(R.id.appBarLayout);
         appBarLayout.setOutlineProvider(null);
-        databaseVersion = findViewById(R.id.schedule_version);
-        databaseVersion.setText(helper.getLastDatabaseVersion().replace(".sqlite", ""));
-
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
@@ -58,7 +54,6 @@ public class ScheduleActivity extends AppCompatActivity {
                 motionLayout.setProgress(percent);
             }
         });
-
 
         final TextView majorName = findViewById(R.id.major_name);
         final AdaptiveTaskLoad task = new AdaptiveTaskLoad(mRepo, null);
@@ -93,7 +88,6 @@ public class ScheduleActivity extends AppCompatActivity {
         if (tabLayout.getTabAt(dayNumber) != null)
             tabLayout.getTabAt(dayNumber).select();
         tabLayout.setScrollPosition(dayNumber, 0f, true);
-        themeToggle = findViewById(R.id.schedule_theme_toggle);
     }
 
     private int getDayNumber() {
@@ -106,6 +100,12 @@ public class ScheduleActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        ((TextView) findViewById(R.id.schedule_version)).setText(helper.getLastDatabaseVersion().replaceAll(".sqlite$", ""));
     }
 
     public void scheduleToggleTheme(View view) {

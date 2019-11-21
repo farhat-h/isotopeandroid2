@@ -24,14 +24,14 @@ public class Helper {
 
 
     public String getLastDatabaseVersion() {
-        return preferences.getString(DATABASE_VERSION, "");
+        return preferences.getString(DATABASE_VERSION, "default version");
     }
 
     public boolean updateDatabaseVersion(String version) {
         String previous = getLastDatabaseVersion();
-        if (!previous.equals(version)) {
+        if (!previous.equals(version) && !version.isEmpty()) {
             editor.putString(DATABASE_VERSION, version);
-            editor.apply();
+            editor.commit();
             return true;
         }
 
@@ -54,7 +54,7 @@ public class Helper {
                 editor.putBoolean(INITIALIZED, false);
                 editor.putString(DATABASE_VERSION, "");
                 editor.putBoolean(IS_DARK_MODE, false);
-                editor.apply();
+                editor.commit();
             }
             _instance = new Helper(sharedPreferences, editor);
         }
@@ -109,8 +109,8 @@ public class Helper {
 
     public void resetMajor() {
         editor.remove(MAJOR_ID);
-        editor.remove(INITIALIZED);
-        editor.apply();
+        editor.putBoolean(INITIALIZED, false);
+        editor.commit();
     }
 
     public void hideKeyboard(Activity act) {

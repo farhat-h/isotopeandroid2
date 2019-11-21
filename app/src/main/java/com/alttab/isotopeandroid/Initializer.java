@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
 
 import com.alttab.isotopeandroid.Tasks.DownloadTask;
 import com.alttab.isotopeandroid.Tasks.SuccessFailCallbacks;
@@ -21,8 +20,6 @@ import com.alttab.isotopeandroid.Workers.VersionCheckWorker;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 public class Initializer extends AppCompatActivity implements SuccessFailCallbacks {
@@ -52,15 +49,6 @@ public class Initializer extends AppCompatActivity implements SuccessFailCallbac
         } catch (IOException e) {
             e.printStackTrace();
         }
-/*
-        Intent scheduleIntent = new Intent(this, ScheduleActivity.class);
-        Intent selectIntent = new Intent(this, MainActivity.class);
-        if (helper.getIsInitialized())
-            startActivity(scheduleIntent);
-        else
-            startActivity(selectIntent);
-*/
-
 
     }
 
@@ -103,7 +91,9 @@ public class Initializer extends AppCompatActivity implements SuccessFailCallbac
     public void onSuccess() {
         DownloadDatabaseSync remoteVersionHandler = new DownloadDatabaseSync(this);
         try {
-            helper.updateDatabaseVersion(remoteVersionHandler.getVersion());
+            String version = remoteVersionHandler.getVersion();
+            if (!version.isEmpty())
+                helper.updateDatabaseVersion(version);
         } catch (IOException e) {
             e.printStackTrace();
         }

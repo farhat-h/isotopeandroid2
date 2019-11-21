@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             @Override
             public void onLoaderReset(@NonNull Loader<List<Major>> loader) {
-                Log.i("reset", "onLoaderReset");
             }
         };
     }
