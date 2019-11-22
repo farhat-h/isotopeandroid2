@@ -8,79 +8,149 @@
         app:constraintSetStart="@id/cs_header_start"
         app:duration="300">
 
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="0"
+                app:motionTarget="@id/major_name" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="70"
+                app:motionTarget="@id/major_name" />
+        </KeyFrameSet>
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="0"
+                app:motionTarget="@id/edit_major" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="70"
+                app:motionTarget="@id/edit_major" />
+        </KeyFrameSet>
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="0"
+                app:motionTarget="@id/schedule_regime" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="70"
+                app:motionTarget="@id/schedule_regime" />
+        </KeyFrameSet>
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="0"
+                app:motionTarget="@id/schedule_theme_toggle" />
+            <KeyAttribute
+                android:alpha="0"
+                app:framePosition="70"
+                app:motionTarget="@id/schedule_theme_toggle" />
+        </KeyFrameSet>
     </Transition>
 
 
     <ConstraintSet android:id="@+id/cs_header_start">
-
-        <!-- MAJOR NAME FRAME_1  -->
+        <!--        major name-->
         <Constraint
             android:id="@id/major_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="80dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <!-- WEEK DAY FRAME_1  -->
-        <Constraint
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            app:layout_constraintBottom_toTopOf="@+id/major_name"
+            android:layout_marginLeft="18dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@id/tabLayout"
             app:layout_constraintLeft_toLeftOf="parent" />
-
-        <!-- HIDDEN WEEK REF FRAME_1  -->
+        <!--        week ref-->
         <Constraint
             android:id="@id/week_reference_hidden"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="?attr/actionBarSize"
-            android:translationX="-370dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@id/tabLayout"
+            app:layout_constraintRight_toLeftOf="parent" />
 
+        <Constraint
+            android:id="@id/edit_major"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:layout_constraintBottom_toBottomOf="@id/major_name"
+            app:layout_constraintLeft_toRightOf="@id/major_name"
+            app:layout_constraintTop_toTopOf="@id/major_name" />
+        <Constraint
+            android:id="@+id/schedule_regime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            app:layout_constraintBottom_toTopOf="@id/major_name"
+            app:layout_constraintLeft_toLeftOf="@id/major_name" />
+
+        <Constraint
+            android:id="@id/schedule_theme_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            app:layout_constraintBottom_toBottomOf="@id/major_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/major_name" />
     </ConstraintSet>
 
     <ConstraintSet android:id="@+id/cs_header_end">
-        <!-- MAJOR NAME FRAME_2  -->
-
+        <!--        major name -->
         <Constraint
             android:id="@id/major_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginTop="80dp"
-            android:alpha="0"
-            android:translationX="200dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-        <!-- WEEK DAY FRAME_2  -->
-        <Constraint
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="20dp"
-            android:alpha="0"
-            android:translationX="200dp"
-            app:layout_constraintBottom_toTopOf="@+id/major_name"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="18dp"
+            android:layout_marginBottom="32dp"
+            android:translationY="-128dp"
+            app:layout_constraintBottom_toTopOf="@id/tabLayout"
+            app:layout_constraintLeft_toLeftOf="parent" />
+        <!--        week ref-->
 
-            />
 
-        <!-- HIDDEN WEEK REF FRAME_2  -->
         <Constraint
             android:id="@id/week_reference_hidden"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="20dp"
-            android:layout_marginBottom="12dp"
-            android:translationX="0dp"
-            app:layout_constraintBottom_toTopOf="@+id/tabLayout"
-            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_marginLeft="18dp"
+            android:layout_marginBottom="32dp"
+            app:layout_constraintBottom_toTopOf="@id/tabLayout"
+            app:layout_constraintLeft_toLeftOf="parent" />
 
-            />
+        <Constraint
+            android:id="@id/edit_major"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:translationY="-128dp"
+
+            app:layout_constraintBottom_toBottomOf="@id/major_name"
+            app:layout_constraintLeft_toRightOf="@id/major_name"
+            app:layout_constraintTop_toTopOf="@id/major_name" />
+
+        <Constraint
+            android:id="@+id/schedule_regime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:translationY="-128dp"
+            app:layout_constraintBottom_toTopOf="@id/major_name"
+            app:layout_constraintLeft_toLeftOf="@id/major_name" />
+
+
+        <Constraint
+            android:id="@id/schedule_theme_toggle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:translationX="56dp"
+            app:layout_constraintBottom_toBottomOf="@id/major_name"
+            app:layout_constraintLeft_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/major_name" />
     </ConstraintSet>
 </MotionScene>

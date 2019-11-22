@@ -9,7 +9,8 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="240dp"
-        android:background="?attr/BackgroundColor">
+        android:background="?attr/BackgroundColor"
+        android:paddingTop="24dp">
 
         <androidx.constraintlayout.motion.widget.MotionLayout
             android:id="@+id/motion_layout"
@@ -18,6 +19,14 @@
             android:minHeight="125dp"
             app:layoutDescription="@xml/header_animation"
             app:layout_scrollFlags="scroll|enterAlways|snap|exitUntilCollapsed">
+
+            <TextView
+                android:id="@+id/schedule_regime"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="regimeQA"
+                android:textAppearance="@style/font_tab"
+                android:textColor="?attr/secondaryTextColor" />
 
             <ImageView
                 android:id="@+id/schedule_theme_toggle"
@@ -38,16 +47,12 @@
                 android:id="@+id/edit_major"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
                 android:onClick="backToMajorSelect"
                 android:padding="8dp"
-                android:src="@drawable/ic_edit"
-                app:layout_constraintBottom_toBottomOf="@id/major_name"
-                app:layout_constraintLeft_toRightOf="@id/major_name"
-                app:layout_constraintTop_toTopOf="@id/major_name" />
+                android:src="@drawable/ic_edit" />
 
             <TextView
                 android:id="@+id/major_name"
@@ -62,6 +67,7 @@
                 android:id="@+id/week_reference_hidden"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="32dp"
                 android:orientation="horizontal">
 
                 <TextView

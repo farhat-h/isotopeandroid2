@@ -1,7 +1,9 @@
 package com.alttab.isotopeandroid.database;
 
 import android.app.Application;
+import android.util.Log;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class Repository {
@@ -10,11 +12,14 @@ public class Repository {
     private MajorsDAO majors;
     private SessionsDAO sessions;
     private int subgroup = 1;
+    private RegimeDAO regimes;
 
     public Repository(Application application) {
         Data database = Data.getInstance(application);
         majors = database.majors();
         sessions = database.sessions();
+//        Calendar calendar = Calendar.getInstance();
+        regimes = database.regimes();
     }
 
     public void setSubgroup(int subgroup) {
@@ -35,6 +40,10 @@ public class Repository {
 
     public List<NamedSession> getAlternativeSessions(int day, String majorId, String time, String majorName, String year) {
         return sessions.getAlternativeSessions(day, time, majorId, majorName, year);
+    }
+
+    public Regime getCurrentRegime(int day, int month) {
+        return regimes.currentRegime(day, month);
     }
 
     public Major getMajorById(String majorId) {

@@ -16,6 +16,7 @@ import com.alttab.isotopeandroid.Adapters.DayPageViewAdapter;
 import com.alttab.isotopeandroid.Tasks.AdaptiveLoaderCallbacks;
 import com.alttab.isotopeandroid.Tasks.AdaptiveTaskLoad;
 import com.alttab.isotopeandroid.database.Major;
+import com.alttab.isotopeandroid.database.Regime;
 import com.alttab.isotopeandroid.database.Repository;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
@@ -34,6 +35,12 @@ public class ScheduleActivity extends AppCompatActivity {
     public static Repository mRepo;
     public static Major currentlySelectedMajor;
     private Helper helper;
+    private Regime currentRegime;
+    private TextView tvRegime;
+
+    /*
+
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,8 @@ public class ScheduleActivity extends AppCompatActivity {
         mRepo.setSubgroup(helper.getSubgroup());
         motionLayout = findViewById(R.id.motion_layout);
         appBarLayout = findViewById(R.id.appBarLayout);
+
+        tvRegime = findViewById(R.id.schedule_regime);
         appBarLayout.setOutlineProvider(null);
         appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
             @Override
@@ -62,12 +71,23 @@ public class ScheduleActivity extends AppCompatActivity {
             public void onExecute(WeakReference<Repository> wrRepo) {
                 String majorId = helper.getMajorId();
                 currentlySelectedMajor = wrRepo.get().getMajorById(majorId);
+                Calendar calendar = Calendar.getInstance();
+                int month = calendar.get(Calendar.MONTH) + 1;// 0 based so add 1;
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                currentRegime = wrRepo.get().getCurrentRegime(day, month);
             }
 
             @Override
             public void onPostExecute() {
                 if (currentlySelectedMajor != null)
                     majorName.setText(currentlySelectedMajor.fullName);
+                if (currentRegime != null) {
+
+                    String stringBuilder = currentRegime.regimeQAB +
+                            (!currentRegime.regimeZ.equals("null") ? " " + currentRegime.regimeZ : "") +
+                            (!currentRegime.regimeM.equals("null") ? " " + currentRegime.regimeM : "");
+                    tvRegime.setText(stringBuilder);
+                }
             }
         });
         task.execute();

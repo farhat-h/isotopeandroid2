@@ -8,13 +8,15 @@ import androidx.room.RoomDatabase;
 
 import java.io.File;
 
-@Database(entities = {Major.class, Session.class}, version = 1, exportSchema = false)
+@Database(entities = {Major.class, Session.class, Regime.class}, version = 1, exportSchema = false)
 
 
 abstract class Data extends RoomDatabase {
     public abstract MajorsDAO majors();
 
     public abstract SessionsDAO sessions();
+
+    public abstract RegimeDAO regimes();
 
     public static Data INSTANCE;
 
