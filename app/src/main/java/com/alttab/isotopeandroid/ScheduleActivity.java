@@ -108,6 +108,7 @@ public class ScheduleActivity extends AppCompatActivity {
         if (tabLayout.getTabAt(dayNumber) != null)
             tabLayout.getTabAt(dayNumber).select();
         tabLayout.setScrollPosition(dayNumber, 0f, true);
+        viewPager2.setCurrentItem(dayNumber, false);
     }
 
     private int getDayNumber() {

@@ -9,6 +9,7 @@ import androidx.loader.content.Loader;
 
 import android.content.Intent;
 import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.util.TypedValue;
@@ -184,5 +185,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public void toggleTheme(View view) {
         helper.toggleActivityTheme(this);
+    }
+
+    public void openWebPage(View view) {
+
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/farhat-h"));
+        startActivity(browserIntent);
     }
 }

@@ -148,4 +148,16 @@
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:onClick="openWebPage"
+        android:text="farhat-h.github.io ✌"
+        android:textAppearance="@style/font_subtitle"
+        android:textColor="?attr/secondaryTextColor"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@id/major_select_cancel"
+        app:layout_constraintLeft_toLeftOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
