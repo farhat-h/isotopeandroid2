@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:motion="http://schemas.android.com/tools">
+
+    <Transition
+        app:constraintSetEnd="@id/cs_sg_select_end"
+        app:constraintSetStart="@id/cs_sg_select_start"
+        app:duration="200" />
+    <ConstraintSet android:id="@+id/cs_sg_select_start">
+        <Constraint
+            android:id="@id/subgroup_highlighter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/subgroup_1"
+            app:layout_constraintRight_toRightOf="@id/subgroup_1"
+            app:layout_constraintTop_toBottomOf="@id/subgroup_1" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/cs_sg_select_end">
+        <Constraint
+            android:id="@id/subgroup_highlighter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="@id/subgroup_2"
+            app:layout_constraintRight_toRightOf="@id/subgroup_2"
+            app:layout_constraintTop_toBottomOf="@id/subgroup_2" />
+    </ConstraintSet>
+</MotionScene>

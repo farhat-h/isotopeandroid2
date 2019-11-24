@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/containerColor"
+    android:paddingLeft="36dp"
+    android:paddingRight="36dp">
+
+    <ImageView
+        android:id="@+id/theme_toggle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:onClick="toggleTheme"
+        android:padding="16dp"
+        android:src="?attr/themeToggleIcon"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pick_major_title"
+        android:layout_width="240dp"
+
+        android:layout_height="wrap_content"
+        android:text="@string/pick_your_major"
+        android:textAppearance="@style/font_title"
+        android:textColor="?attr/primaryTextColor"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".27" />
+
+
+    <AutoCompleteTextView
+
+        android:id="@+id/majors_autocomplete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="46dp"
+        android:background="@drawable/input_container"
+        android:hint="@string/major_pick_hint"
+        android:textAppearance="@style/font_input"
+        android:textColor="?attr/primaryTextColor"
+        android:textColorHint="?attr/secondaryTextColor"
+        android:visibility="visible"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pick_major_title" />
+
+    <TextView
+        android:id="@+id/selected_major"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="FIA1-04"
+        android:textAppearance="@style/font_display3"
+        android:textSize="18dp"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/majors_autocomplete" />
+
+    <LinearLayout
+        android:id="@+id/group_select_container"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        app:layout_constraintLeft_toLeftOf="@id/majors_autocomplete"
+        app:layout_constraintTop_toBottomOf="@id/selected_major">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:gravity="left"
+            android:text="Group"
+            android:textAppearance="@style/font_display"
+            android:textSize="24dp" />
+
+        <TextView
+            android:id="@+id/subgroup_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="24dp"
+            android:background="?attr/BackgroundColor"
+            android:onClick="selectGroup1"
+            android:paddingLeft="24dp"
+            android:paddingTop="8dp"
+            android:paddingRight="24dp"
+            android:paddingBottom="8dp"
+            android:text="1"
+            android:textAppearance="@style/font_title"
+            android:textSize="36sp" />
+
+        <TextView
+            android:id="@+id/subgroup_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="selectGroup2"
+            android:paddingLeft="24dp"
+            android:paddingTop="8dp"
+            android:paddingRight="24dp"
+            android:paddingBottom="8dp"
+            android:text="2"
+            android:textAppearance="@style/font_title"
+            android:textColor="?attr/secondaryTextColor"
+            android:textSize="36sp" />
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="?attr/actionBarSize"
+        android:onClick="openWebPage"
+        android:text="farhat-h.github.io ✌"
+        android:textAppearance="@style/font_subtitle"
+        android:textColor="?attr/secondaryTextColor"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -13,23 +13,18 @@ import java.io.File;
 
 abstract class Data extends RoomDatabase {
     public abstract MajorsDAO majors();
-
     public abstract SessionsDAO sessions();
-
     public abstract RegimeDAO regimes();
-
     public static Data INSTANCE;
 
-    public static Data getInstance(Application application) {
-        File databaseFile = new File(application.getFilesDir(), "database.sqlite");
-        synchronized (Data.class) {
-            if (INSTANCE == null)
-                INSTANCE = Room.databaseBuilder(application, Data.class, "DATABASE")
-                        .fallbackToDestructiveMigration()
-                        .createFromFile(databaseFile)
-                        .build();
 
-            return INSTANCE;
-        }
+    public synchronized static Data getInstance(Application application, File databaseFile) {
+        if (INSTANCE == null)
+            INSTANCE = Room.databaseBuilder(application, Data.class, "DATABASE")
+                    .fallbackToDestructiveMigration()
+                    .createFromFile(databaseFile)
+                    .build();
+
+        return INSTANCE;
     }
 }

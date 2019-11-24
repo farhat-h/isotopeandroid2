@@ -8,6 +8,7 @@ import androidx.work.Worker;
 import androidx.work.WorkerParameters;
 
 import com.alttab.isotopeandroid.Helper;
+import com.alttab.isotopeandroid.utils.Util;
 
 import java.io.IOException;
 
@@ -16,48 +17,20 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class VersionCheckWorker extends Worker {
-    private final static String versionURL = "http://137.74.192.93/api/version";
-    private OkHttpClient client;
-    private Helper helper;
-    private DownloadDatabaseSync downloader;
+    private Util tools;
 
     public VersionCheckWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
         super(context, workerParams);
-        this.client = new OkHttpClient();
-        helper = Helper.getInstance(context);
-        downloader = new DownloadDatabaseSync(context);
+        tools = Util.getInstance(context);
     }
 
 
     @NonNull
     @Override
     public Result doWork() {
-        try {
-            boolean shouldUpdateDatabase = shouldUpdate();
-            if (shouldUpdateDatabase) {
-                if (downloader.download()) {
-                    Log.e("DOWNLOADED ! ", "doWork: ");
-                    return Result.success();
-                } else
-                    return Result.retry();
-            } else {
-                return Result.success();
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-            return Result.failure();
-        }
+        boolean updateStatus = tools.updateDatabaseSync();
+        Log.e("FROM WORKER", updateStatus ? "SUCCESS" : "FAIL");
+        return updateStatus ? Result.success() : Result.failure();
     }
 
-
-    private boolean shouldUpdate() throws IOException {
-        Request request = new Request.Builder().url(versionURL).build();
-        Response res = client.newCall(request).execute();
-        if (res.isSuccessful()) {
-            helper.updateDatabaseVersion(res.body().string());
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

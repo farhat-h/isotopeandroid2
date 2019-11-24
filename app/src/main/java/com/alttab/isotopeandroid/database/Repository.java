@@ -3,6 +3,7 @@ package com.alttab.isotopeandroid.database;
 import android.app.Application;
 import android.util.Log;
 
+import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
@@ -14,11 +15,10 @@ public class Repository {
     private int subgroup = 1;
     private RegimeDAO regimes;
 
-    public Repository(Application application) {
-        Data database = Data.getInstance(application);
+    public Repository(Application application, File databaseFile) {
+        Data database = Data.getInstance(application, databaseFile);
         majors = database.majors();
         sessions = database.sessions();
-//        Calendar calendar = Calendar.getInstance();
         regimes = database.regimes();
     }
 

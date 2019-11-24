@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/subgroup_select_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/containerColor"
+    android:padding="36dp"
+    app:layoutDescription="@xml/subgroup_animation"
+    tools:context=".Fragments.SubgroupSelector">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:id="@+id/btn_cancel_subgroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="12dp"
+        android:text="cancel"
+        android:textAppearance="@style/font_time_numbers"
+        android:textColor="?attr/secondaryTextColor"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+
+        />
+
+    <TextView
+        android:id="@+id/selected_major_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="picked major"
+        android:textAppearance="@style/font_display"
+        android:textColor="?attr/secondaryTextColor"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias=".3" />
+
+    <TextView
+        android:id="@+id/_subgroupTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginRight="36dp"
+        android:text="Subgroup"
+        android:textAppearance="@style/font_display2"
+        android:textColor="?attr/primaryTextColor"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selected_major_name" />
+
+    <TextView
+        android:id="@+id/subgroup_1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="32dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:drawablePadding="12dp"
+        android:focusable="true"
+
+        android:padding="12dp"
+        android:text="1"
+        android:textAppearance="@style/font_title"
+        android:textColor="?attr/primaryTextColor"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@id/_subgroupTextView"
+        app:layout_constraintLeft_toRightOf="@id/_subgroupTextView"
+        app:layout_constraintTop_toTopOf="@id/_subgroupTextView" />
+
+    <TextView
+        android:id="@+id/subgroup_2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="24dp"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="12dp"
+
+        android:text="2"
+        android:textAppearance="@style/font_title"
+        android:textColor="?attr/primaryTextColor"
+        android:textSize="36sp"
+        app:layout_constraintBottom_toBottomOf="@id/subgroup_1"
+        app:layout_constraintLeft_toRightOf="@id/subgroup_1"
+        app:layout_constraintTop_toTopOf="@id/subgroup_1" />
+
+
+    <TextView
+        android:id="@+id/btn_confirm_subgroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="12dp"
+        android:text="confirm"
+        android:textAppearance="@style/font_time_numbers"
+        android:textColor="?attr/colorPrimary"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <ImageView
+        android:id="@+id/subgroup_highlighter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/highlighter"
+        app:layout_constraintLeft_toLeftOf="@id/subgroup_1"
+        app:layout_constraintRight_toRightOf="@id/subgroup_1"
+        app:layout_constraintTop_toBottomOf="@id/subgroup_1" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

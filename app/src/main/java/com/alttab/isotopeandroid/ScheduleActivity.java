@@ -18,6 +18,7 @@ import com.alttab.isotopeandroid.Tasks.AdaptiveTaskLoad;
 import com.alttab.isotopeandroid.database.Major;
 import com.alttab.isotopeandroid.database.Regime;
 import com.alttab.isotopeandroid.database.Repository;
+import com.alttab.isotopeandroid.utils.Util;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -34,23 +35,21 @@ public class ScheduleActivity extends AppCompatActivity {
     private MotionLayout motionLayout;
     public static Repository mRepo;
     public static Major currentlySelectedMajor;
-    private Helper helper;
     private Regime currentRegime;
     private TextView tvRegime;
-
-    /*
-
-     */
+    private Util tools;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        helper = Helper.getInstance(this);
-        setTheme(helper.getThemeStyle());
-        helper.hideSystemUI(this.getWindow());
+        tools = Util.getExtendedInstance(getApplication());
+        setTheme(tools.preferenceManager.theme());
+        // @TODO implement UI Manager
+//        helper.hideSystemUI(this.getWindow());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        mRepo = new Repository(getApplication());
-        mRepo.setSubgroup(helper.getSubgroup());
+        mRepo = tools.repo;
+        mRepo.setSubgroup(tools.preferenceManager.subgroup());
+
         motionLayout = findViewById(R.id.motion_layout);
         appBarLayout = findViewById(R.id.appBarLayout);
 
@@ -69,7 +68,7 @@ public class ScheduleActivity extends AppCompatActivity {
         task.setCallbacks(new AdaptiveLoaderCallbacks<Major>() {
             @Override
             public void onExecute(WeakReference<Repository> wrRepo) {
-                String majorId = helper.getMajorId();
+                String majorId = tools.preferenceManager.majorId();
                 currentlySelectedMajor = wrRepo.get().getMajorById(majorId);
                 Calendar calendar = Calendar.getInstance();
                 int month = calendar.get(Calendar.MONTH) + 1;// 0 based so add 1;
@@ -117,7 +116,7 @@ public class ScheduleActivity extends AppCompatActivity {
     }
 
     public void backToMajorSelect(View view) {
-        helper.resetMajor();
+        tools.preferenceManager.resetMajor();
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -126,10 +125,11 @@ public class ScheduleActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        ((TextView) findViewById(R.id.schedule_version)).setText(helper.getLastDatabaseVersion().replaceAll(".sqlite$", ""));
+        ((TextView) findViewById(R.id.schedule_version)).setText(tools.preferenceManager.dbversion().replaceAll(".sqlite$", ""));
     }
 
     public void scheduleToggleTheme(View view) {
-        helper.toggleActivityTheme(this);
+        //@TODO implement UI manager
+//        helper.toggleActivityTheme(this);
     }
 }
