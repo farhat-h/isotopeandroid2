@@ -10,7 +10,6 @@
     app:layoutDescription="@xml/subgroup_animation"
     tools:context=".Fragments.SubgroupSelector">
 
-    <!-- TODO: Update blank fragment layout -->
     <TextView
         android:id="@+id/btn_cancel_subgroup"
         android:layout_width="wrap_content"

@@ -1,7 +1,9 @@
 package com.alttab.isotopeandroid.utils;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 
 import com.alttab.isotopeandroid.Tasks.SuccessFailCallbacks;
@@ -19,6 +21,7 @@ public class Util {
     public Fetcher fetcher;
     private Context context;
     public Repository repo;
+    private UIManager uiManager;
 
     public static synchronized Util getInstance(Context context) {
         if (instance == null) {
@@ -29,10 +32,12 @@ public class Util {
 
     public static synchronized Util getExtendedInstance(Application app) {
         if (instance == null) {
-            instance = new Util(app.getApplicationContext());
+            instance = new Util(app);
         } else {
-            if (instance.repo == null)
+            if (instance.repo == null) {
                 instance.repo = new Repository(app, instance.fileManager.getDatabaseFile());
+                instance.repo.setSubgroup(instance.preferenceManager.subgroup());
+            }
         }
 
         return instance;
@@ -42,6 +47,7 @@ public class Util {
         fileManager = new FileManager(context);
         preferenceManager = new PreferenceManager(context);
         fetcher = new Fetcher();
+        uiManager = new UIManager();
         this.context = context;
     }
 
@@ -50,11 +56,25 @@ public class Util {
         preferenceManager = new PreferenceManager(context);
         fetcher = new Fetcher();
         repo = new Repository(application, fileManager.getDatabaseFile());
+        uiManager = new UIManager();
         this.context = application.getApplicationContext();
     }
 
     public void updateDatabase(SuccessFailCallbacks callbacks) {
         new AsyncNetworkTask(callbacks, context).execute();
+    }
+
+
+    public void toggleTheme(Activity activity, Class activityClass) {
+
+        preferenceManager.toggleTheme();
+
+
+        activity.setTheme(preferenceManager.theme());
+        Intent intent = new Intent(activity.getApplicationContext(), activityClass);
+        activity.startActivity(intent);
+        activity.finish();
+
     }
 
     public boolean updateDatabaseSync() {

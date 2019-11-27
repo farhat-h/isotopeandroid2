@@ -64,7 +64,6 @@ public class MajorSelect extends Fragment implements AdapterView.OnItemClickList
 
         Major major = (Major) parent.getItemAtPosition(position);
         tools.preferenceManager.setMajorId(major.majorId, major.fullName);
-
         callbacks.onMajorSelected();
     }
 

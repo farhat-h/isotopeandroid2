@@ -29,14 +29,14 @@
                 android:textColor="?attr/secondaryTextColor" />
 
             <ImageView
-                android:id="@+id/schedule_theme_toggle"
+                android:id="@+id/schedule_contextual_menu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="24dp"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:clickable="true"
                 android:focusable="true"
-                android:onClick="scheduleToggleTheme"
+                android:onClick="showCtxMenu"
                 android:padding="16dp"
                 android:src="?attr/themeToggleIcon"
                 app:layout_constraintBottom_toBottomOf="@id/major_name"

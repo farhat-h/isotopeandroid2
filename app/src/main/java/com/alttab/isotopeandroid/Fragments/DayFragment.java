@@ -22,8 +22,11 @@ import com.alttab.isotopeandroid.Helper;
 import com.alttab.isotopeandroid.R;
 import com.alttab.isotopeandroid.ScheduleActivity;
 import com.alttab.isotopeandroid.Tasks.CustomSessionLoader;
+import com.alttab.isotopeandroid.Tasks.GeneralAsyncTask;
+import com.alttab.isotopeandroid.Tasks.GeneralAsyncTaskCallbacks;
 import com.alttab.isotopeandroid.Tasks.SessionLoaderCallbacks;
 import com.alttab.isotopeandroid.database.Session;
+import com.alttab.isotopeandroid.utils.Util;
 
 import java.util.Collections;
 import java.util.Comparator;
@@ -41,13 +44,11 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
     private int currentDay;
     private SessionRecyclerViewAdapter adapter;
     private RecyclerView.RecycledViewPool pool;
+    private List<Session> sessionsList;
+    private Util tools;
 
-    public static Comparator<Session> sessionComparator = new Comparator<Session>() {
-        @Override
-        public int compare(Session o1, Session o2) {
-            return o1.time.compareTo(o2.time);
-        }
-    };
+
+    public static Comparator<Session> sessionComparator = (o1, o2) -> o1.time.compareTo(o2.time);
 
     public DayFragment() {
         // Required empty public constructor
@@ -55,6 +56,7 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
 
     public DayFragment(RecyclerView.RecycledViewPool pool) {
         this.pool = pool;
+        tools = Util.getInstance(getContext());
     }
 
 
@@ -69,15 +71,32 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
         if (this.pool != null) {
             recyclerView.setRecycledViewPool(pool);
         }
-
         return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        CustomSessionLoader loader = new CustomSessionLoader(currentDay, Helper.getInstance(getContext()).getMajorId(), ScheduleActivity.mRepo, this);
+        GeneralAsyncTask loader = new GeneralAsyncTask(new GeneralAsyncTaskCallbacks() {
+            @Override
+            public void onPreExecute() {
+
+            }
+            @Override
+            public void onPostExecute() {
+                onTaskDone(sessionsList);
+            }
+
+            @Override
+            public void doInBackground() {
+                sessionsList = tools.repo.getSessionsForDay(tools.preferenceManager.majorId(), currentDay);
+                onResults(sessionsList);
+            }
+        });
+
         loader.execute();
+        /*CustomSessionLoader loader = new CustomSessionLoader(currentDay, Helper.getInstance(getContext()).getMajorId(), ScheduleActivity.mRepo, this);
+        loader.execute();*/
     }
 
 

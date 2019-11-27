@@ -12,7 +12,6 @@ public class Regime {
     @PrimaryKey
     @NonNull
     public final String id;
-
     public final int startMonth;
     public final int endMonth;
     public final int startDay;
@@ -21,6 +20,19 @@ public class Regime {
     public final String regimeQAB;
     public final String regimeZ;
     public final String regimeM;
+
+    @NonNull
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Q")
+                .append(regimeQAB)
+                .append(" ")
+                .append(regimeZ)
+                .append(" ")
+                .append(regimeM);
+        return builder.toString();
+    }
 
     public Regime(@NonNull String id, int startMonth, int endMonth, int startDay, int endDay, String regimeQAB, String regimeZ, String regimeM) {
         this.id = id;

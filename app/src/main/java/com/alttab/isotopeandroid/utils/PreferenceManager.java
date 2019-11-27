@@ -32,8 +32,10 @@ public class PreferenceManager {
         return prefs.getInt(K_THEME, THEME_LIGHT);
     }
 
-    public void setTheme(int theme) {
-        editor().putInt(K_THEME, theme).commit();
+    public void toggleTheme() {
+        int theme = theme();
+        int targetTheme = theme == THEME_LIGHT ? THEME_DARK : THEME_LIGHT;
+        editor().putInt(K_THEME, targetTheme).commit();
     }
 
 

@@ -36,6 +36,14 @@
         <item name="android:windowBackground">@drawable/idk</item>
         <item name="android:colorBackground">#FFF</item>
         <item name="windowNoTitle">true</item>
+        <item name="popupMenuStyle">@style/popupMenu</item>
+        <item name="android:popupMenuStyle">@style/popupMenu</item>
+        <item name="android:textAppearanceLargePopupMenu">
+            @style/font_subtitle
+        </item>
+        <item name="android:textAppearanceSmallPopupMenu">
+            @style/font_subtitle
+        </item>
     </style>
 
     <style name="AppThemeDark" parent="Theme.AppCompat.DayNight.NoActionBar">
@@ -70,7 +78,30 @@
         <item name="DividerColor">#000</item>
         <item name="emptySessionBackground">@drawable/empty_sesh_dark</item>
 
+
+        <item name="popupMenuStyle">@style/popupMenu</item>
+        <item name="android:popupMenuStyle">@style/popupMenu</item>
+        <item name="android:textAppearanceLargePopupMenu">
+            @style/font_subtitle
+        </item>
+        <item name="android:textAppearanceSmallPopupMenu">
+            @style/font_subtitle
+        </item>
+
     </style>
+
+
+    <style name="popupMenu" parent="Widget.AppCompat.PopupMenu">
+        <item name="android:textAppearanceLargePopupMenu">
+            @style/font_subtitle
+        </item>
+        <item name="android:textAppearanceSmallPopupMenu">
+            @style/font_subtitle
+        </item>
+        <item name="android:textColor">?attr/primaryTextColor</item>
+        <item name="android:itemBackground">?attr/containerColor</item>
+    </style>
+
 
     <style name="font_title">
         <item name="android:textSize">48sp</item>

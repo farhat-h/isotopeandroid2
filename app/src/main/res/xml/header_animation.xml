@@ -46,11 +46,11 @@
             <KeyAttribute
                 android:alpha="1"
                 app:framePosition="0"
-                app:motionTarget="@id/schedule_theme_toggle" />
+                app:motionTarget="@id/schedule_contextual_menu" />
             <KeyAttribute
                 android:alpha="0"
                 app:framePosition="70"
-                app:motionTarget="@id/schedule_theme_toggle" />
+                app:motionTarget="@id/schedule_contextual_menu" />
         </KeyFrameSet>
     </Transition>
 
@@ -91,7 +91,7 @@
             app:layout_constraintLeft_toLeftOf="@id/major_name" />
 
         <Constraint
-            android:id="@id/schedule_theme_toggle"
+            android:id="@id/schedule_contextual_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="24dp"
@@ -144,7 +144,7 @@
 
 
         <Constraint
-            android:id="@id/schedule_theme_toggle"
+            android:id="@id/schedule_contextual_menu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginRight="24dp"

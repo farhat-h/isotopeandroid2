@@ -1,31 +1,29 @@
 package com.alttab.isotopeandroid;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.menu.MenuBuilder;
+import androidx.appcompat.view.menu.MenuPopupHelper;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.constraintlayout.motion.widget.MotionLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.alttab.isotopeandroid.Adapters.DayPageViewAdapter;
-import com.alttab.isotopeandroid.Tasks.AdaptiveLoaderCallbacks;
-import com.alttab.isotopeandroid.Tasks.AdaptiveTaskLoad;
+import com.alttab.isotopeandroid.Tasks.GeneralAsyncTask;
+import com.alttab.isotopeandroid.Tasks.GeneralAsyncTaskCallbacks;
 import com.alttab.isotopeandroid.database.Major;
 import com.alttab.isotopeandroid.database.Regime;
-import com.alttab.isotopeandroid.database.Repository;
 import com.alttab.isotopeandroid.utils.Util;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-import java.lang.ref.WeakReference;
 import java.util.Calendar;
-import java.util.Objects;
 
 public class ScheduleActivity extends AppCompatActivity {
 
@@ -33,11 +31,12 @@ public class ScheduleActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private TabLayout tabLayout;
     private MotionLayout motionLayout;
-    public static Repository mRepo;
     public static Major currentlySelectedMajor;
     private Regime currentRegime;
     private TextView tvRegime;
+    private ImageView ctxMenu;
     private Util tools;
+    private PopupMenu menu;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,67 +46,42 @@ public class ScheduleActivity extends AppCompatActivity {
 //        helper.hideSystemUI(this.getWindow());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
-        mRepo = tools.repo;
-        mRepo.setSubgroup(tools.preferenceManager.subgroup());
-
         motionLayout = findViewById(R.id.motion_layout);
         appBarLayout = findViewById(R.id.appBarLayout);
-
+        ctxMenu = findViewById(R.id.schedule_contextual_menu);
         tvRegime = findViewById(R.id.schedule_regime);
         appBarLayout.setOutlineProvider(null);
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                float percent = -verticalOffset / (float) appBarLayout.getTotalScrollRange();
-                motionLayout.setProgress(percent);
-            }
+        appBarLayout.addOnOffsetChangedListener((appBarLayout, verticalOffset) -> {
+            float percent = -verticalOffset / (float) appBarLayout.getTotalScrollRange();
+            motionLayout.setProgress(percent);
         });
 
         final TextView majorName = findViewById(R.id.major_name);
-        final AdaptiveTaskLoad task = new AdaptiveTaskLoad(mRepo, null);
-        task.setCallbacks(new AdaptiveLoaderCallbacks<Major>() {
+        GeneralAsyncTask loadingTask = new GeneralAsyncTask(new GeneralAsyncTaskCallbacks() {
             @Override
-            public void onExecute(WeakReference<Repository> wrRepo) {
-                String majorId = tools.preferenceManager.majorId();
-                currentlySelectedMajor = wrRepo.get().getMajorById(majorId);
-                Calendar calendar = Calendar.getInstance();
-                int month = calendar.get(Calendar.MONTH) + 1;// 0 based so add 1;
-                int day = calendar.get(Calendar.DAY_OF_MONTH);
-                currentRegime = wrRepo.get().getCurrentRegime(day, month);
+            public void onPreExecute() {
+
             }
 
             @Override
             public void onPostExecute() {
-                if (currentlySelectedMajor != null)
-                    majorName.setText(currentlySelectedMajor.fullName);
-                if (currentRegime != null) {
-
-                    String stringBuilder = currentRegime.regimeQAB +
-                            (!currentRegime.regimeZ.equals("null") ? " " + currentRegime.regimeZ : "") +
-                            (!currentRegime.regimeM.equals("null") ? " " + currentRegime.regimeM : "");
-                    tvRegime.setText(stringBuilder);
-                }
+                majorName.setText(tools.preferenceManager.majorName());
+                tvRegime.setText(currentRegime.toString());
             }
-        });
-        task.execute();
-        viewPager2 = findViewById(R.id.viewPager);
-        tabLayout = findViewById(R.id.tabLayout);
-        viewPager2.setAdapter(new DayPageViewAdapter(this));
-        TabLayoutMediator tabViewMediator = new TabLayoutMediator(tabLayout, viewPager2, new TabLayoutMediator.TabConfigurationStrategy() {
+
             @Override
-            public void onConfigureTab(@NonNull TabLayout.Tab tab, int position) {
-                tab.setText(Constants.DAYS[position]);
+            public void doInBackground() {
+                Calendar calendar = Calendar.getInstance();
+                int month = calendar.get(Calendar.MONTH) + 1;// 0 based so add 1;
+                int day = calendar.get(Calendar.DAY_OF_MONTH);
+                currentRegime = tools.repo.getCurrentRegime(day, month);
+                currentlySelectedMajor = tools.repo.getMajorById(tools.preferenceManager.majorId());
             }
-
         });
+        loadingTask.execute();
+        setupLayout();
 
-        tabViewMediator.attach();
-        int dayNumber = getDayNumber() - 2;
-        dayNumber = dayNumber % 7;
-        if (tabLayout.getTabAt(dayNumber) != null)
-            tabLayout.getTabAt(dayNumber).select();
-        tabLayout.setScrollPosition(dayNumber, 0f, true);
-        viewPager2.setCurrentItem(dayNumber, false);
+        prepareContextMenu();
     }
 
     private int getDayNumber() {
@@ -128,8 +102,31 @@ public class ScheduleActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.schedule_version)).setText(tools.preferenceManager.dbversion().replaceAll(".sqlite$", ""));
     }
 
-    public void scheduleToggleTheme(View view) {
-        //@TODO implement UI manager
-//        helper.toggleActivityTheme(this);
+    private void setupLayout() {
+        viewPager2 = findViewById(R.id.viewPager);
+        tabLayout = findViewById(R.id.tabLayout);
+        viewPager2.setAdapter(new DayPageViewAdapter(this));
+        TabLayoutMediator tabViewMediator = new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> tab.setText(Constants.DAYS[position]));
+
+        tabViewMediator.attach();
+        int dayNumber = getDayNumber() - 2;
+        dayNumber = dayNumber % 7;
+
+        if (tabLayout.getTabAt(dayNumber) != null) {
+            tabLayout.getTabAt(dayNumber).select();
+            tabLayout.setScrollPosition(dayNumber, 0f, true);
+            viewPager2.setCurrentItem(dayNumber, false);
+        }
+    }
+
+    public void showCtxMenu(View view) {
+        menu.show();
+    }
+
+    private void prepareContextMenu() {
+        menu = new PopupMenu(this, ctxMenu);
+        menu.inflate(R.menu.contextual_menu);
+        MenuPopupHelper helper = new MenuPopupHelper(getApplicationContext(), (MenuBuilder) menu.getMenu(), ctxMenu);
+        helper.setForceShowIcon(true);
     }
 }

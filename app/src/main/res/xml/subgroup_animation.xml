@@ -7,7 +7,29 @@
     <Transition
         app:constraintSetEnd="@id/cs_sg_select_end"
         app:constraintSetStart="@id/cs_sg_select_start"
-        app:duration="200" />
+        app:duration="200">
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha=".3"
+                app:framePosition="0"
+                app:motionTarget="@id/subgroup_2" />
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="100"
+                app:motionTarget="@id/subgroup_2" />
+
+
+            <KeyAttribute
+                android:alpha="1"
+                app:framePosition="0"
+                app:motionTarget="@id/subgroup_1" />
+            <KeyAttribute
+                android:alpha=".3"
+                app:framePosition="100"
+                app:motionTarget="@id/subgroup_1" />
+        </KeyFrameSet>
+    </Transition>
     <ConstraintSet android:id="@+id/cs_sg_select_start">
         <Constraint
             android:id="@id/subgroup_highlighter"
