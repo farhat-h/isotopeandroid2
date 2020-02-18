@@ -13,8 +13,10 @@ import okhttp3.Response;
 
 public class Fetcher {
     private OkHttpClient client;
-    private static final String downloadUrl = "http://137.74.192.93/api/getLastDatabaseVersion";
-    private static final String versionURL = "http://137.74.192.93/api/version";
+
+    private static final String hostName = "http://farhat-h.space";
+    private static final String downloadUrl = hostName + "/api/getLastDatabaseVersion";
+    private static final String versionURL = hostName +"/api/version";
 
     public Fetcher() {
         client = new OkHttpClient();
