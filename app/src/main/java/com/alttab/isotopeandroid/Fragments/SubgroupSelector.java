@@ -34,6 +34,11 @@ public class SubgroupSelector extends Fragment {
         tools = Util.getExtendedInstance(application);
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,

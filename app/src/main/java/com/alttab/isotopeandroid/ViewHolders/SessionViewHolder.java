@@ -2,6 +2,7 @@ package com.alttab.isotopeandroid.ViewHolders;
 
 import android.content.Context;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 
@@ -146,6 +147,13 @@ public class SessionViewHolder extends RecyclerView.ViewHolder implements View.O
     public void onClick(View v) {
         AlternativesSheetFragment fragment = new AlternativesSheetFragment(mSession.day, mSession.time, mContext);
         FragmentActivity act = (FragmentActivity) mContext;
-        fragment.show(act.getSupportFragmentManager(), "ALTERNATIVES");
+        try{
+            // Prevents "java.lang.IllegalStateException: Can not perform this action after onSaveInstanceState"
+            // Until cause is found and fixed.
+            fragment.show(act.getSupportFragmentManager(), "ALTERNATIVES");
+        } catch (IllegalStateException ex){
+            Log.e("Error","State exception");
+            ex.printStackTrace();
+        }
     }
 }

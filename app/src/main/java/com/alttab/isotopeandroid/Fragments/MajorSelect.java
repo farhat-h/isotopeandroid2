@@ -40,9 +40,13 @@ public class MajorSelect extends Fragment implements AdapterView.OnItemClickList
     public MajorSelect(Application application, MajorSelectCallbacks callbacks) {
 
         tools = Util.getExtendedInstance(application);
-        task = new GeneralAsyncTask(this);
         this.callbacks = callbacks;
 
+    }
+
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        setRetainInstance(true);
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -54,6 +58,7 @@ public class MajorSelect extends Fragment implements AdapterView.OnItemClickList
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        task = new GeneralAsyncTask(this);
         task.execute();
         input = view.findViewById(R.id.majors_autocomplete);
 

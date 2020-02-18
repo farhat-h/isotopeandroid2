@@ -99,6 +99,11 @@ public class DayFragment extends Fragment implements SessionLoaderCallbacks<List
         loader.execute();*/
     }
 
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+    }
 
     @Override
     public void onResults(List<Session> objects) {
