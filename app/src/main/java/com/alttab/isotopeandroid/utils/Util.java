@@ -21,6 +21,11 @@ public class Util {
     public Fetcher fetcher;
     private Context context;
     public Repository repo;
+
+    public UIManager getUiManager() {
+        return uiManager;
+    }
+
     private UIManager uiManager;
 
     public static synchronized Util getInstance(Context context) {

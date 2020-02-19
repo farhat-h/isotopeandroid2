@@ -35,6 +35,12 @@ public class SubgroupSelector extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        tools.getUiManager().hideKeyboard(getActivity());
+        super.onResume();
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
@@ -84,6 +90,7 @@ public class SubgroupSelector extends Fragment {
 
     private void cancel() {
         tools.preferenceManager.resetMajor();
+        callbacks.onCancelGroupSelect();
     }
 
 }
