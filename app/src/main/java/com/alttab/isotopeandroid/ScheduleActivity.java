@@ -1,5 +1,6 @@
 package com.alttab.isotopeandroid;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.view.menu.MenuPopupHelper;
@@ -38,8 +39,16 @@ public class ScheduleActivity extends AppCompatActivity {
     private Util tools;
     private PopupMenu menu;
 
+    private String DAY_NUMBER_STATE_KEY="CACHED_SELECTED_DAY";
+    private int savedDayNumber=-1;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        savedDayNumber = -1;
+        if(savedInstanceState!=null){
+            savedDayNumber = savedInstanceState.getInt(DAY_NUMBER_STATE_KEY);
+        }
+
         tools = Util.getExtendedInstance(getApplication());
         setTheme(tools.preferenceManager.theme());
         // @TODO implement UI Manager
@@ -84,6 +93,12 @@ public class ScheduleActivity extends AppCompatActivity {
         prepareContextMenu();
     }
 
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putInt(DAY_NUMBER_STATE_KEY,tabLayout.getSelectedTabPosition());
+        super.onSaveInstanceState(outState);
+    }
+
     private int getDayNumber() {
         Calendar calendar = Calendar.getInstance();
         return calendar.get(Calendar.DAY_OF_WEEK);
@@ -109,7 +124,7 @@ public class ScheduleActivity extends AppCompatActivity {
         TabLayoutMediator tabViewMediator = new TabLayoutMediator(tabLayout, viewPager2, (tab, position) -> tab.setText(Constants.DAYS[position]));
 
         tabViewMediator.attach();
-        int dayNumber = getDayNumber() - 2;
+        int dayNumber = savedDayNumber>-1 ? savedDayNumber : getDayNumber() - 2;
         dayNumber = dayNumber % 7;
 
         if (tabLayout.getTabAt(dayNumber) != null) {
